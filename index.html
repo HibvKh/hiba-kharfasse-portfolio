@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hiba Kharfasse | Big Data & AI Engineering</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* NOUVELLE PALETTE DE COULEURS (Violet Électrique & Nuances de Bleu) */
+    :root {
+      --bg-main: #0D1117; /* Presque noir, inspiré GitHub */
+      --bg-alt: #161B22; /* Légèrement plus clair */
+      --card-bg: rgba(22, 27, 34, 0.95);
+      --primary: #9B59B6; /* Violet Électrique */
+      --primary-soft: #BB86FC; /* Violet plus doux, presque lavande */
+      --primary-dark: #6A329F; /* Violet foncé */
+      --text-main: #F0F8FF; /* Blanc Cassé */
+      --text-muted: #B4BCCB; /* Gris-bleu doux pour le texte secondaire */
+      --border-subtle: rgba(187, 134, 252, 0.3); /* Bordure subtile violette */
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --transition-fast: 0.25s ease;
+
+      /* Couleurs supplémentaires pour les détails */
+      --accent-green: #34D399; /* Vert menthe pour des touches de "actif" */
+      --accent-blue-light: #60A5FA; /* Bleu clair pour d'autres accents */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      /* Nouveau dégradé plus profond */
+      background:
+        radial-gradient(circle at 0% 0%, rgba(187, 134, 252, 0.15) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(94, 234, 212, 0.2) 0, transparent 55%),
+        linear-gradient(135deg, #0D1117 0%, #0D1117 40%, #161B22 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout helpers */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 4.5rem 0;
+      position: relative;
+    }
+
+    .section + .section {
+      border-top: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title span.badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(187, 134, 252, 0.4);
+      background: rgba(106, 50, 159, 0.2);
+      color: var(--primary-soft);
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 2.2rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.8rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 1.6rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(187, 134, 252, 0.18), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      box-shadow: 0 0 12px rgba(187, 134, 252, 0.8);
+    }
+
+    .pill-strong {
+      border-color: rgba(187, 134, 252, 0.7);
+      color: var(--primary-soft);
+      background: rgba(106, 50, 159, 0.45);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.2s ease,
+        border-color 0.18s ease, color 0.18s ease;
+      background: transparent;
+      color: var(--text-main);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-soft));
+      color: var(--bg-main);
+      box-shadow: 0 14px 40px rgba(155, 89, 182, 0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 50px rgba(155, 89, 182, 0.65);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.4);
+      background: rgba(22, 27, 34, 0.9);
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(187, 134, 252, 0.7);
+      color: var(--primary-soft);
+      background: rgba(22, 27, 34, 1);
+      transform: translateY(-2px);
+    }
+
+    .btn-icon {
+      font-size: 1rem;
+    }
+
+    /* Navbar + Hero */
+    .navbar-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+          to bottom,
+          rgba(13, 17, 23, 0.95),
+          rgba(13, 17, 23, 0.75),
+          transparent
+        );
+      border-bottom: 1px solid rgba(22, 27, 34, 0.9);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .logo span {
+      color: var(--primary-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      list-style: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links li {
+      white-space: nowrap; /* Empêche le retour à la ligne pour les éléments longs */
+    }
+
+    .nav-links a {
+      position: relative;
+      color: var(--text-muted);
+      padding-bottom: 0.25rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-soft));
+      transition: width 0.22s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.35rem;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--text-main);
+      margin: 4px 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(36px);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(155, 89, 182, 0.32), transparent 65%);
+      top: -160px;
+      right: -120px;
+    }
+
+    .hero::after {
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(96, 165, 250, 0.4), transparent 65%);
+      bottom: -120px;
+      left: -120px;
+    }
+
+    .hero-inner {
+      display: grid;
+      gap: 2.2rem;
+    }
+
+    @media (min-width: 840px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+        align-items: center;
+      }
+    }
+
+    .hero-heading {
+      font-size: clamp(2.3rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-heading span.accent {
+      background: linear-gradient(135deg, var(--primary-soft), var(--primary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-tagline {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--primary-soft);
+      margin-bottom: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .hero-tagline-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent-green);
+      box-shadow: 0 0 14px rgba(52, 211, 153, 0.9);
+    }
+
+    .hero-sub {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-typewriter {
+      min-height: 1.4rem;
+      font-size: 0.9rem;
+      color: var(--primary-soft);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.7rem;
+      position: relative;
+      padding-right: 1rem;
+    }
+
+    .hero-typewriter::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: var(--primary-soft);
+      animation: cursorBlink 0.8s infinite;
+    }
+
+    @keyframes cursorBlink {
+      0%, 40% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .hero-mini {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.4rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 1.6rem 1.7rem;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(187, 134, 252, 0.22), rgba(22, 27, 34, 0.95));
+      border: 1px solid rgba(106, 50, 159, 0.7);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-card-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-role {
+      font-size: 0.9rem;
+      color: var(--primary-soft);
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-meta {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-card-badge {
+      position: absolute;
+      bottom: 0.9rem;
+      right: 1.1rem;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(187, 134, 252, 0.6);
+      background: rgba(22, 27, 34, 0.95);
+      color: var(--primary-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* Skills */
+    .skill-group-title {
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .skills-grid {
+      display: grid;
+      gap: 1.2rem 1.6rem;
+    }
+
+    @media (min-width: 640px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .skill-item-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+
+    .skill-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .skill-bar {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(22, 27, 34, 0.95);
+      overflow: hidden;
+      border: 1px solid rgba(106, 50, 159, 0.7);
+    }
+
+    .skill-progress {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--primary), var(--primary-soft));
+      box-shadow: 0 0 18px rgba(155, 89, 182, 0.6);
+      border-radius: inherit;
+      transition: width 1.1s ease-out;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-muted);
+      background: rgba(22, 27, 34, 0.8);
+    }
+
+    .tag-strong {
+      border-color: rgba(187, 134, 252, 0.7);
+      color: var(--primary-soft);
+      background: rgba(106, 50, 159, 0.35);
+    }
+
+    /* Timeline / lists */
+    .timeline {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.2rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      box-shadow: 0 0 14px rgba(187, 134, 252, 0.8);
+    }
+
+    .timeline-item-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .timeline-item-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-item-body {
+      font-size: 0.85rem;
+      color: #cbd5f5;
+    }
+
+    .timeline-item-body ul {
+      margin-left: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    .timeline-item-body li {
+      margin-bottom: 0.18rem;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.4rem 1.5rem;
+      border: 1px solid rgba(106, 50, 159, 0.7);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, rgba(187, 134, 252, 0.45), rgba(106, 50, 159, 0.9));
+      color: var(--bg-main);
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .service-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+
+    .service-body {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .service-chip {
+      position: absolute;
+      bottom: 0.9rem;
+      right: 1rem;
+      font-size: 0.7rem;
+      padding: 0.18rem 0.65rem;
+      border-radius: var(--radius-pill);
+      background: rgba(22, 27, 34, 0.96);
+      border: 1px solid rgba(187, 134, 252, 0.7);
+      color: var(--primary-soft);
+    }
+
+    /* List styles */
+    .list-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      font-size: 0.8rem;
+    }
+
+    .list-chip {
+      border-radius: var(--radius-pill);
+      padding: 0.35rem 0.8rem;
+      background: rgba(22, 27, 34, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-muted);
+    }
+
+    .list-chip strong {
+      color: var(--primary-soft);
+    }
+
+    /* Get in touch */
+    .contact-grid {
+      display: grid;
+      gap: 1.6rem;
+    }
+
+    @media (min-width: 640px) {
+      .contact-grid {
+        grid-template-columns: 2fr 3fr;
+      }
+    }
+
+    .contact-details {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .contact-details dl {
+      display: block;
+      margin-top: 0.4rem;
+    }
+
+    .contact-details dt {
+      font-weight: 500;
+      color: #cbd5f5;
+      margin-top: 0.7rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .contact-details dd {
+      margin: 0;
+      color: var(--text-muted);
+    }
+    .contact-details dd a {
+      color: var(--primary-soft);
+      text-decoration: underline;
+    }
+
+    .contact-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .contact-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      padding: 1.6rem 0 2.2rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(22, 27, 34, 0.9);
+      text-align: center;
+    }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive bits */
+    @media (max-width: 890px) {
+      .nav-links {
+        position: fixed;
+        inset: 56px 1rem auto 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.9rem;
+        padding: 1rem 1.2rem;
+        background: rgba(13, 17, 23, 0.98);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(106, 50, 159, 0.8);
+        transform-origin: top;
+        transform: scaleY(0.7);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.18s ease, transform 0.18s ease;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        transform: scaleY(1);
+        pointer-events: auto;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 0.8rem;
+      }
+
+      .section {
+        padding: 3.3rem 0;
+      }
+
+      .hero-card {
+        margin-bottom: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar-wrapper">
+    <header class="navbar">
+      <div class="logo">
+        <span>Hiba</span> Kharfasse
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#about">À Propos</a></li>
+        <li><a href="#skills">Compétences</a></li>
+        <li><a href="#projects">Projets</a></li>
+        <li><a href="#experience">Expériences</a></li>
+        <li><a href="#services">Expertise</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#education">Formation</a></li>
+        <li><a href="#extracurricular">Vie Associative</a></li>
+        <li><a href="#get-in-touch">Contact</a></li>
+      </ul>
+    </header>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-left reveal">
+          <div class="hero-tagline">
+            <span class="hero-tagline-dot"></span>
+            BIG DATA · AI ENGINEER ORIENTED
+          </div>
+          <h1 class="hero-heading">
+            Hiba <span class="accent">Kharfasse</span>
+          </h1>
+          <p class="hero-sub">
+            Étudiante en 5ème année d'Ingénierie en Big Data et Intelligence Artificielle à l'ENSA Tétouan. Je suis à la recherche d'un stage de fin d'études (PFE) pour appliquer mes connaissances en IA, data science et systèmes connectés.
+          </p>
+          <p class="hero-typewriter" data-text="Passionnée par les technologies intelligentes, Data Science et Deep Learning."></p>
+          <div class="hero-actions">
+            <a href="#get-in-touch" class="btn btn-primary">
+              Me contacter <span class="btn-icon">↗</span>
+            </a>
+            <a href="https://github.com/HibvKh" target="_blank" class="btn btn-ghost">
+              Mon GitHub
+            </a>
+          </div>
+          <div class="hero-mini">
+            <span class="pill pill-strong">
+              <span class="pill-dot"></span> Tétouan · Maroc
+            </span>
+            <span class="pill">
+              <span class="pill-dot"></span> Big Data & AI Engineering @ ENSA Tétouan
+            </span>
+          </div>
+        </div>
+
+        <aside class="hero-right reveal">
+          <div class="hero-card">
+            <div class="hero-card-title">Aperçu du profil</div>
+            <div class="hero-name">Hiba Kharfasse</div>
+            <div class="hero-role">Étudiante Ingénieure Big Data & AI</div>
+            <div class="hero-meta">
+              <div>• Forte expertise en Python, Deep Learning (TensorFlow, Keras)</div>
+              <div>• Maîtrise des technologies Big Data : Hadoop, Spark, Kafka</div>
+              <div>• Intérêt pour l'analyse de données, l'IoT et les systèmes connectés</div>
+              <div>• Compétences en visualisation de données (Power BI, Tableau)</div>
+            </div>
+            <div class="hero-card-badge">Ouverte aux PFE</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="about" class="section">
+      <div class="container">
+        <div class="grid grid-2">
+          <div class="reveal">
+            <h2 class="section-title">
+              À Propos
+              <span class="badge">Big Data & AI</span>
+            </h2>
+            <p class="section-subtitle">
+              Étudiante de 5ème année d'Ingénierie, je cherche à m'intégrer à des projets innovants combinant l'analyse de données, le Deep Learning et l'intégration IoT.
+            </p>
+            <div class="card">
+              <p style="font-size:0.9rem; color:#cbd5f5; margin-bottom:0.9rem;">
+                Je suis passionnée par la concrétisation des concepts d'<strong>Intelligence Artificielle</strong> et de <strong>Data Science</strong> en solutions concrètes, comme le développement de cobots de recommandation (NLP, GPT-40) ou la prédiction d'anomalies (Autoencoder, LSTM, CNN).
+              </p>
+              <p style="font-size:0.9rem; color:#cbd5f5;">
+                Mon parcours m'a permis d'acquérir une solide base technique sur toute la chaîne de valeur de la donnée, des technologies Big Data (Hadoop, Spark) aux outils de visualisation (Power BI, Tableau).
+              </p>
+              <div class="tags">
+                <span class="tag tag-strong">Data Science & AI</span>
+                <span class="tag">Big Data (Hadoop, Spark, Kafka)</span>
+                <span class="tag">Deep Learning (CNN, LSTM, Transformers)</span>
+                <span class="tag">Python & R</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card">
+              <div class="skill-group-title">Langues</div>
+              <div class="list-chips" style="margin-bottom:1.3rem;">
+                <div class="list-chip"><strong>Arabe</strong> · Langue Maternelle</div>
+                <div class="list-chip"><strong>Français</strong> · Courant</div>
+                <div class="list-chip"><strong>Anglais</strong> · Courant</div>
+                <div class="list-chip"><strong>Turc</strong> · Notions de base</div>
+              </div>
+
+              <div class="skill-group-title">Mon focus actuel</div>
+              <p style="font-size:0.85rem; color:#cbd5f5;">
+                • Stage de Fin d'Études (PFE) en IA/Data Science<br>
+                • Application de modèles de Deep Learning avancés (e.g., Transformers)<br>
+                • Maîtrise des écosystèmes Big Data pour des solutions scalables<br>
+                • Contribution à des projets innovants dans des domaines comme l'IoT
+              </p>
+              <div class="tags" style="margin-top:0.9rem;">
+                <span class="tag">PFE 2026</span>
+                <span class="tag">NLP & GPT-40</span>
+                <span class="tag">Analyse d'Anomalies</span>
+                <span class="tag">IoT Integration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">
+            Compétences Techniques
+            <span class="badge">Data, AI & Big Data</span>
+          </h2>
+          <p class="section-subtitle">
+            Un ensemble complet de compétences allant du développement logiciel à la gestion d'infrastructures Big Data et à la modélisation d'Intelligence Artificielle.
+          </p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="reveal">
+            <div class="card">
+              <div class="skill-group-title">Data Science & Programmation</div>
+              <div class="skills-grid">
+                <div>
+                  <div class="skill-item-title">Python, R & C</div>
+                  <div class="skill-meta">Développement, Scripting, Calcul Scientifique</div>
+                  <div class="skill-bar">
+                    <div class="skill-progress" data-percent="90"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="skill-item-title">Machine Learning & DL</div>
+                  <div class="skill-meta">TensorFlow, Keras, Scikit-learn, CNN, LSTM</div>
+                  <div class="skill-bar">
+                    <div class="skill-progress" data-percent="85"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="skill-item-title">Analyse & Visualisation</div>
+                  <div class="skill-meta">Pandas, NumPy, Matplotlib, Power BI, Tableau</div>
+                  <div class="skill-bar">
+                    <div class="skill-progress" data-percent="88"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="skill-item-title">NLP & Web Scraping</div>
+                  <div class="skill-meta">BeautifulSoup, modèles NLP, GPT-40</div>
+                  <div class="skill-bar">
+                    <div class="skill-progress" data-percent="75"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card">
+              <div class="skill-group-title">Big Data & Bases de Données</div>
+              <div class="skills-grid">
+                <div>
+                  <div class="skill-item-title">Big Data Ecosystems</div>
+                  <div class="skill-meta">Hadoop (HDFS, YARN), Spark, Hive, Kafka, Airflow</div>
+                  <div class="skill-bar">
+                    <div class="skill-progress" data-percent="80"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="skill-item-title">Bases de Données SQL & NoSQL</div>
+                  <div class="skill-meta">MySQL, PostgreSQL, Snowflake, MongoDB</div>
+                  <div class="skill-bar">
+                    <div class="skill-progress" data-percent="78"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="skill-item-title">Outils de Design</div>
+                  <div class="skill-meta">Canva, Illustrator, Photoshop, Adobe Premiere Pro</div>
+                  <div class="skill-bar">
+                    <div class="skill-progress" data-percent="70"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="tags">
+                <span class="tag tag-strong">Hadoop/Spark</span>
+                <span class="tag">MongoDB & SQL</span>
+                <span class="tag">Matlab</span>
+                <span class="tag">GPT-40</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">
+            Projets Académiques
+            <span class="badge">AI & Data Science</span>
+          </h2>
+          <p class="section-subtitle">
+            Projets appliqués en Intelligence Artificielle et Data Science, démontrant une capacité à gérer la donnée du scraping à la modélisation avancée (Deep Learning).
+          </p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="reveal">
+            <div class="card">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-item-title">Détection d'Émotions Faciales en Temps Réel</div>
+                  <div class="timeline-item-meta">CNN · TensorFlow/Keras · OpenCV</div>
+                  <div class="timeline-item-body">
+                    <ul>
+                      <li>Construction d'un système de détection et de classification d'émotions faciales en temps réel.</li>
+                      <li>Utilisation des Réseaux Neuronaux Convolutifs (CNN) pour la classification.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-title">Prédiction Boursière (Nifty 50)</div>
+                  <div class="timeline-item-meta">CNN · LSTM · Transformation 2D</div>
+                  <div class="timeline-item-body">
+                    <ul>
+                      <li>Prédiction du prix de l'indice boursier Nifty 50 en utilisant des modèles hybrides CNN et LSTM.</li>
+                      <li>Transformation des données de séries temporelles en histogrammes 2D pour le traitement par CNN.</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-item-title">Analyse d'Espérance de Vie Mondiale</div>
+                    <div class="timeline-item-meta">Régression Linéaire · Random Forest · SVR</div>
+                    <div class="timeline-item-body">
+                      <ul>
+                        <li>Analyse des facteurs influençant l'espérance de vie, atteignant un score R² de 0.949.</li>
+                        <li>Application de différents modèles de Machine Learning pour la comparaison des performances.</li>
+                      </ul>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-item-title">DARIJAFLOW - Classification du Dialecte Darija</div>
+                  <div class="timeline-item-meta">CNN · RNN · Transformers · IoT</div>
+                  <div class="timeline-item-body">
+                    <ul>
+                      <li>Développement d'un système pour classifier les dialectes Darija (marocain).</li>
+                      <li>Intégration du Speech-to-Text, de la traduction et de l'IoT via des modèles avancés (CNNs, RNNs, Transformers).</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-title">Comparaison de Plateformes de Streaming (VizStream)</div>
+                  <div class="timeline-item-meta">Web Scraping · NLP · Streamlit</div>
+                  <div class="timeline-item-body">
+                    <ul>
+                      <li>Comparaison de plateformes (Twitch, Kick, Nimo TV, Trovo) via Web Scraping.</li>
+                      <li>Utilisation de NLP et de visualisations interactives avec Streamlit pour l'analyse.</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-item-title">Contrôle de LED par Détection de Geste</div>
+                    <div class="timeline-item-meta">Arduino · OpenCV · Python</div>
+                    <div class="timeline-item-body">
+                      <ul>
+                        <li>Système intelligent liant la détection du nombre de doigts (OpenCV) à une carte Arduino Uno.</li>
+                        <li>Permet d'allumer automatiquement le même nombre de LEDs, illustrant l'intégration IoT.</li>
+                      </ul>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">
+            Expériences
+            <span class="badge">Professionnelles</span>
+          </h2>
+          <p class="section-subtitle">
+            Application des compétences en IA et Big Data au travers de stages centrés sur la recommandation intelligente et la maintenance prédictive.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <div class="card">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-item-title">PFA Internship: Development of a Training Recommendation Cobot</div>
+                <div class="timeline-item-meta">
+                  DynIT RABAT · Jul 2025 – Sep 2025
+                </div>
+                <div class="timeline-item-body">
+                  <ul>
+                    <li>Développement d'un cobot de recommandation intelligent pour Microsoft Learn, combinant Data Science et IA.</li>
+                    <li>Intégration de NLP, de Machine Learning et du modèle GPT-40.</li>
+                    <li>Création d'une interface web interactive (HTML, CSS, JavaScript) pour des recommandations personnalisées.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-item-title">Internship: Anomaly Detection and Failure Prediction</div>
+                <div class="timeline-item-meta">
+                  OCP Khouribga Sidi Chennane · August 2024
+                </div>
+                <div class="timeline-item-body">
+                  <ul>
+                    <li>Création d'une application d'IA pour la détection d'anomalies et la prédiction de pannes.</li>
+                    <li>Application des modèles Autoencoder, LSTM et CNN.</li>
+                    <li>Contribution au suivi en temps réel de plus de 50 véhicules.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="tags" style="margin-top:1rem;">
+              <span class="tag tag-strong">Stage PFA</span>
+              <span class="tag">Maintenance Prédictive</span>
+              <span class="tag">NLP & GPT-40</span>
+              <span class="tag">Data Science</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">
+            Mon Expertise
+            <span class="badge">Ce que j'apporte</span>
+          </h2>
+          <p class="section-subtitle">
+            Grâce à ma formation en Big Data et IA, je suis capable de couvrir l'ensemble du cycle de vie des projets Data, de la collecte à la mise en production des modèles.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-icon">🧠</div>
+            <div class="service-title">Développement de Modèles AI</div>
+            <div class="service-body">
+              Conception et entraînement de modèles de Deep Learning (CNN, LSTM, Transformers) pour la classification, la prédiction de séries temporelles ou le traitement du langage naturel.
+            </div>
+            <span class="service-chip">Deep Learning</span>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-icon">📊</div>
+            <div class="service-title">Analyse et Visualisation de Données</div>
+            <div class="service-body">
+              Nettoyage, analyse exploratoire (EDA) et création de tableaux de bord interactifs (Power BI, Tableau) pour transformer les données brutes en informations exploitables.
+            </div>
+            <span class="service-chip">Power BI · Tableau</span>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-icon">⛓️</div>
+            <div class="service-title">Big Data Pipeline Design</div>
+            <div class="service-body">
+              Mise en place d'architectures de traitement de données volumineuses et distribuées avec l'écosystème Hadoop, Spark pour le calcul et Kafka pour le streaming.
+            </div>
+            <span class="service-chip">Hadoop · Spark · Kafka</span>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-icon">💻</div>
+            <div class="service-title">Projets Python End-to-End</div>
+            <div class="service-body">
+              Développement d'applications complètes basées sur Python, intégrant des bases de données (SQL/NoSQL) et des solutions de web scraping.
+            </div>
+            <span class="service-chip">Python · SQL · MongoDB</span>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-icon">🌐</div>
+            <div class="service-title">IoT et Systèmes Connectés</div>
+            <div class="service-body">
+              Conception de systèmes intelligents (comme le contrôle par geste) intégrant des capteurs, des microcontrôleurs (Arduino/Raspberry Pi) et des applications logicielles.
+            </div>
+            <span class="service-chip">Arduino · OpenCV · IoT</span>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-icon">📚</div>
+            <div class="service-title">Mentorat & Formation Technique</div>
+            <div class="service-body">
+              Partage de connaissances sur des sujets comme Excel, SQL, Python ou Power BI pour aider les équipes non techniques à monter en compétence sur la culture Data.
+            </div>
+            <span class="service-chip">Formation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications" class="section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">
+            Certifications
+            <span class="badge">Compétences Digitales</span>
+          </h2>
+          <p class="section-subtitle">
+            Certifications formelles complétant ma formation académique et validant des compétences pratiques essentielles dans l'ère numérique.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <div class="card">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-item-title">Professional Development Skills for The Digital Age</div>
+                <div class="timeline-item-meta">ALX</div>
+                <div class="timeline-item-body">
+                  Développement de compétences professionnelles essentielles pour réussir dans l'environnement de travail numérique actuel.
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-item-title">Excel Beginner to Pro / Power BI</div>
+                <div class="timeline-item-meta">Udemy</div>
+                <div class="timeline-item-body">
+                  Maîtrise complète d'Excel et de Power BI pour l'analyse et la visualisation de données.
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-item-title">SQL / Python</div>
+                <div class="timeline-item-meta">Udemy</div>
+                <div class="timeline-item-body">
+                  Compétences en gestion de bases de données relationnelles (SQL) et en programmation fondamentale pour la Data Science (Python).
+                </div>
+              </div>
+            </div>
+            <div class="tags" style="margin-top:1rem;">
+              <span class="tag tag-strong">Udemy</span>
+              <span class="tag">ALX</span>
+              <span class="tag">Data Analysis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">
+            Formation Académique
+            <span class="badge">Parcours Ingénierie</span>
+          </h2>
+          <p class="section-subtitle">
+            Un cursus solide orienté vers l'ingénierie, la science des données, et l'Intelligence Artificielle.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <div class="card">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-item-title">Cycle d'Ingénieur: Big Data et Intelligence Artificielle</div>
+                <div class="timeline-item-meta">
+                  École Nationale des Sciences Appliquées (ENSA) – Tétouan · 2023 – Présent
+                </div>
+                <div class="timeline-item-body">
+                  1ère, 2ème et 3ème année du cycle d'ingénierie, avec spécialisation en Big Data et IA.
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-item-title">Cycle Préparatoire (2 ans)</div>
+                <div class="timeline-item-meta">
+                  École Nationale des Sciences Appliquées (ENSA) – Tétouan · 2021 – 2023
+                </div>
+                <div class="timeline-item-body">
+                  Classes préparatoires intensives en mathématiques, physique et informatique.
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-item-title">Baccalauréat (BAC) Sciences Physiques, Option Français</div>
+                <div class="timeline-item-meta">
+                  Lycée Ibn Abdoun – Khouribga · 2020 – 2021
+                </div>
+                <div class="timeline-item-body">
+                  Diplôme obtenu avec la mention Très Bien.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="extracurricular" class="section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">
+            Vie Associative et Loisirs
+            <span class="badge">Engagement & Hobbies</span>
+          </h2>
+          <p class="section-subtitle">
+            Mon engagement associatif et mes loisirs démontrent mon esprit d'équipe, mon organisation et ma passion pour le sport.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <div class="card">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-item-title">Responsabilités Associatives</div>
+                <div class="timeline-item-meta">Press EnsaTe IT & Media Manager, Ensate Press HR Manager</div>
+                <div class="timeline-item-body">
+                  Gestion de l'informatique et des médias pour les associations étudiantes et le club sportif (Sports Club IT & Media Manager).
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-item-title">Loisirs Personnels</div>
+                <div class="timeline-item-meta">Sports et Créativité</div>
+                <div class="timeline-item-body">
+                  <ul>
+                    <li>Athlète de Gym et Bodybuilding, passionnée par la course de sprint.</li>
+                    <li>Pratique du Billard et de la Peinture (Paint).</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="tags" style="margin-top:1rem;">
+              <span class="tag tag-strong">IT & Media Manager</span>
+              <span class="tag">HR Management</span>
+              <span class="tag">Sportive</span>
+              <span class="tag">Peinture</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="get-in-touch" class="section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">
+            Contact
+            <span class="badge">Collaborons</span>
+          </h2>
+          <p class="section-subtitle">
+            Intéressé(e) par mon profil pour un PFE, un projet en IA/Big Data ou une collaboration académique ? Contactez-moi !
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="reveal">
+            <div class="card contact-details">
+              <div class="skill-group-title">Détails de contact</div>
+              <dl>
+                <dt>Email</dt>
+                <dd><a href="mailto:hibakharfasse8@gmail.com">hibakharfasse8@gmail.com</a></dd>
+
+                <dt>Téléphone</dt>
+                <dd><a href="tel:+212656289494">+212 656 289 494</a></dd>
+
+                <dt>LinkedIn</dt>
+                <dd><a href="https://www.linkedin.com/in/kharfasse-hiba-344250316/" target="_blank">linkedin.com/in/kharfasse-hiba-344250316/</a></dd>
+
+                <dt>GitHub</dt>
+                <dd><a href="https://github.com/HibvKh" target="_blank">github.com/HibvKh</a></dd>
+
+                <dt>Location</dt>
+                <dd>Tétouan, Maroc</dd>
+              </dl>
+
+              <div style="margin-top:1.1rem;">
+                <div class="skill-group-title">Sujets privilégiés</div>
+                <p class="contact-note">
+                  • Stage de Fin d'Études (PFE) en IA/Data Science<br>
+                  • Projets de Deep Learning et Big Data<br>
+                  • Collaborations universitaires et recherche
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card contact-cta">
+              <div>
+                <div class="skill-group-title">Réseaux Sociaux</div>
+                <p class="contact-note">
+                  Le moyen le plus rapide de me joindre est via LinkedIn. Je suis toujours disponible pour discuter de la Data, de l'IA et des opportunités d'apprentissage.
+                </p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:0.7rem;">
+                <a class="btn btn-primary" target="_blank" rel="noopener noreferrer"
+                   href="https://www.linkedin.com/in/kharfasse-hiba-344250316/">
+                  LinkedIn <span class="btn-icon">💼</span>
+                </a>
+                <a class="btn btn-ghost" target="_blank" rel="noopener noreferrer"
+                   href="https://github.com/HibvKh">
+                  GitHub
+                </a>
+              </div>
+              <p class="contact-note">
+                Je m'efforce de répondre rapidement aux messages, en particulier ceux qui proposent des objectifs ou des opportunités claires.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Conçu et codé par Hiba Kharfasse · Étudiante Ingénieure Big Data & AI.
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Smooth scroll for internal links
+      const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      const navList = document.querySelector(".nav-links");
+      const navToggle = document.querySelector(".nav-toggle");
+
+      function closeMobileNav() {
+        if (navList && navList.classList.contains("open")) {
+          navList.classList.remove("open");
+        }
+      }
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+          const targetId = this.getAttribute("href");
+          const target = document.querySelector(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+          closeMobileNav();
+        });
+      });
+
+      // Mobile nav toggle
+      if (navToggle && navList) {
+        navToggle.addEventListener("click", function () {
+          navList.classList.toggle("open");
+        });
+      }
+
+      // Hero typewriter animation
+      const typewriterEl = document.querySelector(".hero-typewriter");
+      if (typewriterEl) {
+        const text = typewriterEl.getAttribute("data-text") || "";
+        let index = 0;
+        let deleting = false;
+
+        function type() {
+          if (!deleting && index <= text.length) {
+            typewriterEl.textContent = text.slice(0, index);
+            index++;
+          } else if (deleting && index >= 0) {
+            typewriterEl.textContent = text.slice(0, index);
+            index--;
+          }
+
+          if (index === text.length + 8) {
+            deleting = true;
+          } else if (index === 0) {
+            deleting = false;
+          }
+        }
+
+        setInterval(type, 100);
+      }
+
+      // Reveal on scroll animation
+      const revealEls = document.querySelectorAll(".reveal");
+
+      function handleReveal() {
+        const trigger = window.innerHeight * 0.86;
+        revealEls.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < trigger) {
+            el.classList.add("active");
+          }
+        });
+      }
+
+      handleReveal();
+      window.addEventListener("scroll", handleReveal);
+
+      // Animated skill bars
+      const skillBars = document.querySelectorAll(".skill-progress");
+      const filledBars = new WeakSet();
+
+      function animateSkills() {
+        const trigger = window.innerHeight * 0.9;
+        skillBars.forEach((bar) => {
+          const rect = bar.getBoundingClientRect();
+          if (rect.top < trigger && !filledBars.has(bar)) {
+            const percent = bar.getAttribute("data-percent") || "0";
+            bar.style.width = percent + "%";
+            filledBars.add(bar);
+          }
+        });
+      }
+
+      animateSkills();
+      window.addEventListener("scroll", animateSkills);
+
+      // Highlight active section in nav
+      const sectionIds = [
+        "#about",
+        "#skills",
+        "#projects",
+        "#experience",
+        "#services",
+        "#certifications",
+        "#education",
+        "#extracurricular",
+        "#get-in-touch",
+      ];
+      const sectionEls = sectionIds
+        .map((id) => document.querySelector(id))
+        .filter(Boolean);
+
+      function highlightNav() {
+        let currentId = null;
+        const scrollPos = window.scrollY + window.innerHeight * 0.25;
+
+        sectionEls.forEach((section) => {
+          const top = section.offsetTop;
+          const bottom = top + section.offsetHeight;
+          if (scrollPos >= top && scrollPos < bottom) {
+            currentId = "#" + section.id;
+          }
+        });
+
+        navLinks.forEach((link) => {
+          if (link.getAttribute("href") === currentId) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
+
+      highlightNav();
+      window.addEventListener("scroll", highlightNav);
+    });
+  </script>
+</body>
+</html>
