@@ -134,6 +134,13 @@
       }
     }
 
+    @media (min-width: 1024px) {
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: start;
+      }
+    }
+
     .card {
       background: var(--card-bg);
       border-radius: var(--radius-lg);
@@ -162,6 +169,29 @@
       transform: translateY(-5px);
       border-color: rgba(187, 134, 252, 0.6);
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(155, 89, 182, 0.15);
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--primary-soft);
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .project-link:hover {
+      color: var(--text-main);
+      transform: translateX(3px);
     }
 
     /* Animated background blobs */
@@ -1136,97 +1166,250 @@
       <div class="container">
         <div class="reveal">
           <h2 class="section-title">
-            Projets Académiques
-            <span class="badge">AI & Data Science</span>
+            Projets & Réalisations
+            <span class="badge">Open Source & Académique</span>
           </h2>
           <p class="section-subtitle">
-            Projets appliqués en Intelligence Artificielle et Data Science, démontrant une capacité à gérer la donnée du
-            scraping à la modélisation avancée (Deep Learning).
+            Une sélection de mes travaux en Intelligence Artificielle, Big Data et IoT, tous disponibles sur GitHub.
           </p>
         </div>
 
-        <div class="grid grid-2">
+        <div class="grid grid-2 grid-3">
+          <!-- Projet 1 -->
           <div class="reveal">
-            <div class="card">
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-item-title">Détection d'Émotions Faciales en Temps Réel</div>
-                  <div class="timeline-item-meta">CNN · TensorFlow/Keras · OpenCV</div>
-                  <div class="timeline-item-body">
-                    <ul>
-                      <li>Construction d'un système de détection et de classification d'émotions faciales en temps réel.
-                      </li>
-                      <li>Utilisation des Réseaux Neuronaux Convolutifs (CNN) pour la classification.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-item-title">Prédiction Boursière (Nifty 50)</div>
-                  <div class="timeline-item-meta">CNN · LSTM · Transformation 2D</div>
-                  <div class="timeline-item-body">
-                    <ul>
-                      <li>Prédiction du prix de l'indice boursier Nifty 50 en utilisant des modèles hybrides CNN et
-                        LSTM.</li>
-                      <li>Transformation des données de séries temporelles en histogrammes 2D pour le traitement par
-                        CNN.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-item-title">Analyse d'Espérance de Vie Mondiale</div>
-                  <div class="timeline-item-meta">Régression Linéaire · Random Forest · SVR</div>
-                  <div class="timeline-item-body">
-                    <ul>
-                      <li>Analyse des facteurs influençant l'espérance de vie, atteignant un score R² de 0.949.</li>
-                      <li>Application de différents modèles de Machine Learning pour la comparaison des performances.
-                      </li>
-                    </ul>
-                  </div>
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">DARIJAFLOW</div>
+                <div class="skill-item-title">Speech-to-Text & Translation</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Plateforme d'IA pour la transcription du Darija en temps réel avec traduction anglaise intégrée.
+                </p>
+                <div class="tags">
+                  <span class="tag">NLP</span>
+                  <span class="tag">Python</span>
+                  <span class="tag">AI</span>
                 </div>
               </div>
+              <a href="https://github.com/HibvKh/Darija-Speech-to-Text-with-Real-Time-English-Translation-An-AI-Powered-Web-Platform"
+                target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
             </div>
           </div>
 
+          <!-- Projet 2 -->
           <div class="reveal">
-            <div class="card">
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-item-title">DARIJAFLOW - Classification du Dialecte Darija</div>
-                  <div class="timeline-item-meta">CNN · RNN · Transformers · IoT</div>
-                  <div class="timeline-item-body">
-                    <ul>
-                      <li>Développement d'un système pour classifier les dialectes Darija (marocain).</li>
-                      <li>Intégration du Speech-to-Text, de la traduction et de l'IoT via des modèles avancés (CNNs,
-                        RNNs, Transformers).</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-item-title">Comparaison de Plateformes de Streaming (VizStream)</div>
-                  <div class="timeline-item-meta">Web Scraping · NLP · Streamlit</div>
-                  <div class="timeline-item-body">
-                    <ul>
-                      <li>Comparaison de plateformes (Twitch, Kick, Nimo TV, Trovo) via Web Scraping.</li>
-                      <li>Utilisation de NLP et de visualisations interactives avec Streamlit pour l'analyse.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-item-title">Contrôle de LED par Détection de Geste</div>
-                  <div class="timeline-item-meta">Arduino · OpenCV · Python</div>
-                  <div class="timeline-item-body">
-                    <ul>
-                      <li>Système intelligent liant la détection du nombre de doigts (OpenCV) à une carte Arduino Uno.
-                      </li>
-                      <li>Permet d'allumer automatiquement le même nombre de LEDs, illustrant l'intégration IoT.</li>
-                    </ul>
-                  </div>
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Cobot de Recommandation</div>
+                <div class="skill-item-title">Microsoft Learn Assistant</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Assistant intelligent recommandant des formations Microsoft Learn via scraping et NLP.
+                </p>
+                <div class="tags">
+                  <span class="tag">GPT-4o</span>
+                  <span class="tag">Scraping</span>
+                  <span class="tag">NLP</span>
                 </div>
               </div>
+              <a href="https://github.com/HibvKh/Cobot-Intelligent-de-Recommandation-et-analyse-de-Formations-Microsoft-Learn"
+                target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 3 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Stage OCP</div>
+                <div class="skill-item-title">Surveillance IoT & IA</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Application de surveillance en temps réel utilisant l'IoT et l'IA pour la maintenance prédictive.
+                </p>
+                <div class="tags">
+                  <span class="tag">IoT</span>
+                  <span class="tag">IA</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/Stage-OCP-Surveillance-des-v-hicules-alerte-et-s-curit-"
+                target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 4 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">VizStream</div>
+                <div class="skill-item-title">Streaming Guide & Viz</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Guide ultime du streaming et de la visualisation de données via Web Scraping et Streamlit.
+                </p>
+                <div class="tags">
+                  <span class="tag">Python</span>
+                  <span class="tag">Streamlit</span>
+                  <span class="tag">Web Scraping</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/VizStream" target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 5 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Prediction Boursière</div>
+                <div class="skill-item-title">CNN & LSTM Hybrid</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Prédiction de l'indice Nifty 50 en utilisant des modèles hybrides CNN et LSTM.
+                </p>
+                <div class="tags">
+                  <span class="tag">Deep Learning</span>
+                  <span class="tag">LSTM</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/stock-marcket-prediction-CNN-from-scratch-LSTM-" target="_blank"
+                class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 6 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Somnolence Conducteur</div>
+                <div class="skill-item-title">Driver Safety AI</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Système basé sur l'IA pour la détection en temps réel de la somnolence du conducteur.
+                </p>
+                <div class="tags">
+                  <span class="tag">Computer Vision</span>
+                  <span class="tag">OpenCV</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/d-tection-de-somnolence-du-conducteur" target="_blank"
+                class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 7 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">LED Hand Control</div>
+                <div class="skill-item-title">Gesture Recognition IoT</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Contrôle intelligent des lampes par gestes de la main via vision par ordinateur et Arduino.
+                </p>
+                <div class="tags">
+                  <span class="tag">Arduino</span>
+                  <span class="tag">OpenCV</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/Led-Hand-Control" target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 8 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Sentiment Analysis</div>
+                <div class="skill-item-title">IMDb Review Prediction</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Scraping et analyse sentimentale des critiques IMDb pour prédire le succès des films.
+                </p>
+                <div class="tags">
+                  <span class="tag">NLP</span>
+                  <span class="tag">Scraping</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/Web-Scraping-et-Analyse-Sentimentale-des-Critiques-IMDb-pour-la-Pr-diction-des-Films-Top-10"
+                target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 9 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Business Intelligence</div>
+                <div class="skill-item-title">Retail Sales Analysis</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Solution BI pour l'analyse et la gestion des ventes des supermarchés.
+                </p>
+                <div class="tags">
+                  <span class="tag">Power BI</span>
+                  <span class="tag">SQL</span>
+                  <span class="tag">Data Viz</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/Analyse-et-la-Gestion-des-Ventes-des-Supermarch-s-BI" target="_blank"
+                class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 10 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Emotion Detection</div>
+                <div class="skill-item-title">Facial Expressions AI</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Système de détection et classification des émotions faciales via Deep Learning (CNN).
+                </p>
+                <div class="tags">
+                  <span class="tag">CNN</span>
+                  <span class="tag">TensorFlow</span>
+                  <span class="tag">Keras</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/facial-emotions-detection" target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 11 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Life Expectancy</div>
+                <div class="skill-item-title">Machine Learning Model</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Analyse et prédiction des facteurs d'espérance de vie mondiale (R² = 0.949).
+                </p>
+                <div class="tags">
+                  <span class="tag">ML</span>
+                  <span class="tag">Regression</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/Life_Expectancy-machine-learning" target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
             </div>
           </div>
         </div>
@@ -1262,6 +1445,10 @@
                     <li>Création d'une interface web interactive (HTML, CSS, JavaScript) pour des recommandations
                       personnalisées.</li>
                   </ul>
+                  <a href="https://github.com/HibvKh/Cobot-Intelligent-de-Recommandation-et-analyse-de-Formations-Microsoft-Learn"
+                    target="_blank" class="project-link" style="margin-top:0.5rem;">
+                    Code source GitHub <span>↗</span>
+                  </a>
                 </div>
               </div>
               <div class="timeline-item">
@@ -1275,6 +1462,10 @@
                     <li>Application des modèles Autoencoder, LSTM et CNN.</li>
                     <li>Contribution au suivi en temps réel de plus de 50 véhicules.</li>
                   </ul>
+                  <a href="https://github.com/HibvKh/Stage-OCP-Surveillance-des-v-hicules-alerte-et-s-curit-"
+                    target="_blank" class="project-link" style="margin-top:0.5rem;">
+                    Code source GitHub <span>↗</span>
+                  </a>
                 </div>
               </div>
             </div>
