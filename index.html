@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <title>Hiba Kharfasse | Big Data & AI Engineering</title>
@@ -9,18 +10,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <style>
     /* NOUVELLE PALETTE DE COULEURS (Violet Électrique & Nuances de Bleu) */
     :root {
-      --bg-main: #0D1117; /* Presque noir, inspiré GitHub */
-      --bg-alt: #161B22; /* Légèrement plus clair */
+      --bg-main: #0D1117;
+      /* Presque noir, inspiré GitHub */
+      --bg-alt: #161B22;
+      /* Légèrement plus clair */
       --card-bg: rgba(22, 27, 34, 0.95);
-      --primary: #9B59B6; /* Violet Électrique */
-      --primary-soft: #BB86FC; /* Violet plus doux, presque lavande */
-      --primary-dark: #6A329F; /* Violet foncé */
-      --text-main: #F0F8FF; /* Blanc Cassé */
-      --text-muted: #B4BCCB; /* Gris-bleu doux pour le texte secondaire */
-      --border-subtle: rgba(187, 134, 252, 0.3); /* Bordure subtile violette */
+      --primary: #9B59B6;
+      /* Violet Électrique */
+      --primary-soft: #BB86FC;
+      /* Violet plus doux, presque lavande */
+      --primary-dark: #6A329F;
+      /* Violet foncé */
+      --text-main: #F0F8FF;
+      /* Blanc Cassé */
+      --text-muted: #B4BCCB;
+      /* Gris-bleu doux pour le texte secondaire */
+      --border-subtle: rgba(187, 134, 252, 0.3);
+      /* Bordure subtile violette */
       --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
       --radius-lg: 18px;
       --radius-md: 12px;
@@ -28,8 +42,10 @@
       --transition-fast: 0.25s ease;
 
       /* Couleurs supplémentaires pour les détails */
-      --accent-green: #34D399; /* Vert menthe pour des touches de "actif" */
-      --accent-blue-light: #60A5FA; /* Bleu clair pour d'autres accents */
+      --accent-green: #34D399;
+      /* Vert menthe pour des touches de "actif" */
+      --accent-blue-light: #60A5FA;
+      /* Bleu clair pour d'autres accents */
     }
 
     * {
@@ -75,7 +91,7 @@
       position: relative;
     }
 
-    .section + .section {
+    .section+.section {
       border-top: 1px solid rgba(255, 255, 255, 0.02);
     }
 
@@ -118,6 +134,13 @@
       }
     }
 
+    @media (min-width: 1024px) {
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: start;
+      }
+    }
+
     .card {
       background: var(--card-bg);
       border-radius: var(--radius-lg);
@@ -140,6 +163,94 @@
 
     .card:hover::before {
       opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(187, 134, 252, 0.6);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(155, 89, 182, 0.15);
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--primary-soft);
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .project-link:hover {
+      color: var(--text-main);
+      transform: translateX(3px);
+    }
+
+    /* Animated background blobs */
+    .bg-blobs {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .blob {
+      position: absolute;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(155, 89, 182, 0.1), transparent 70%);
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: move 20s infinite alternate;
+    }
+
+    .blob-1 {
+      top: -10%;
+      left: -10%;
+      background: radial-gradient(circle, rgba(155, 89, 182, 0.15), transparent 70%);
+    }
+
+    .blob-2 {
+      bottom: -10%;
+      right: -10%;
+      background: radial-gradient(circle, rgba(96, 165, 250, 0.1), transparent 70%);
+      animation-delay: -5s;
+    }
+
+    .blob-3 {
+      top: 40%;
+      left: 30%;
+      width: 30vw;
+      height: 30vw;
+      background: radial-gradient(circle, rgba(52, 211, 153, 0.05), transparent 70%);
+      animation-delay: -10s;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(10vw, 5vh) scale(1.1);
+      }
+
+      66% {
+        transform: translate(-5vw, 15vh) scale(0.9);
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
     }
 
     .pill {
@@ -216,23 +327,27 @@
     .navbar-wrapper {
       position: sticky;
       top: 0;
-      z-index: 30;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(
-          to bottom,
-          rgba(13, 17, 23, 0.95),
-          rgba(13, 17, 23, 0.75),
-          transparent
-        );
-      border-bottom: 1px solid rgba(22, 27, 34, 0.9);
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(13, 17, 23, 0.7);
+      border-bottom: 1px solid rgba(155, 89, 182, 0.1);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .navbar-wrapper.scrolled {
+      background: rgba(13, 17, 23, 0.9);
+      border-bottom: 1px solid rgba(155, 89, 182, 0.3);
+      padding: 0.2rem 0;
+      /* Tighten up on scroll */
     }
 
     .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.7rem 1.5rem;
-      max-width: 1100px;
+      padding: 1.2rem 2rem;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
@@ -240,10 +355,10 @@
       display: flex;
       align-items: baseline;
       gap: 0.25rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
 
     .logo span {
@@ -253,15 +368,17 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      gap: 1.8rem;
       list-style: none;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
+      font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
 
     .nav-links li {
-      white-space: nowrap; /* Empêche le retour à la ligne pour les éléments longs */
+      white-space: nowrap;
+      /* Empêche le retour à la ligne pour les éléments longs */
     }
 
     .nav-links a {
@@ -417,8 +534,16 @@
     }
 
     @keyframes cursorBlink {
-      0%, 40% { opacity: 1; }
-      50%, 100% { opacity: 0; }
+
+      0%,
+      40% {
+        opacity: 1;
+      }
+
+      50%,
+      100% {
+        opacity: 0;
+      }
     }
 
     .hero-actions {
@@ -719,6 +844,7 @@
       margin: 0;
       color: var(--text-muted);
     }
+
     .contact-details dd a {
       color: var(--primary-soft);
       text-decoration: underline;
@@ -744,35 +870,37 @@
       text-align: center;
     }
 
-    /* Reveal animations */
-    .reveal {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* GSAP handles reveal animations */
 
     /* Responsive bits */
     @media (max-width: 890px) {
       .nav-links {
         position: fixed;
-        inset: 56px 1rem auto 1rem;
+        inset: 80px 1rem auto 1rem;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.9rem;
-        padding: 1rem 1.2rem;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2.5rem 1.5rem;
         background: rgba(13, 17, 23, 0.98);
+        backdrop-filter: blur(25px);
         border-radius: var(--radius-lg);
-        border: 1px solid rgba(106, 50, 159, 0.8);
+        border: 1px solid rgba(155, 89, 182, 0.4);
         transform-origin: top;
         transform: scaleY(0.7);
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.18s ease, transform 0.18s ease;
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-links a {
+        font-size: 1rem;
+        display: block;
+        padding: 0.5rem;
       }
 
       .nav-links.open {
@@ -801,7 +929,14 @@
     }
   </style>
 </head>
+
 <body>
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
   <div class="navbar-wrapper">
     <header class="navbar">
       <div class="logo">
@@ -827,7 +962,7 @@
   <section class="hero">
     <div class="container">
       <div class="hero-inner">
-        <div class="hero-left reveal">
+        <div class="hero-left">
           <div class="hero-tagline">
             <span class="hero-tagline-dot"></span>
             BIG DATA · AI ENGINEER ORIENTED
@@ -836,9 +971,12 @@
             Hiba <span class="accent">Kharfasse</span>
           </h1>
           <p class="hero-sub">
-            Étudiante en 5ème année d'Ingénierie en Big Data et Intelligence Artificielle à l'ENSA Tétouan. Je suis à la recherche d'un stage de fin d'études (PFE) pour appliquer mes connaissances en IA, data science et systèmes connectés.
+            Étudiante en 5ème année d'Ingénierie en Big Data et Intelligence Artificielle à l'ENSA Tétouan. Je suis à la
+            recherche d'un stage de fin d'études (PFE) pour appliquer mes connaissances en IA, data science et systèmes
+            connectés.
           </p>
-          <p class="hero-typewriter" data-text="Passionnée par les technologies intelligentes, Data Science et Deep Learning."></p>
+          <p class="hero-typewriter"
+            data-text="Passionnée par les technologies intelligentes, Data Science et Deep Learning."></p>
           <div class="hero-actions">
             <a href="#get-in-touch" class="btn btn-primary">
               Me contacter <span class="btn-icon">↗</span>
@@ -857,7 +995,7 @@
           </div>
         </div>
 
-        <aside class="hero-right reveal">
+        <aside class="hero-right">
           <div class="hero-card">
             <div class="hero-card-title">Aperçu du profil</div>
             <div class="hero-name">Hiba Kharfasse</div>
@@ -885,14 +1023,18 @@
               <span class="badge">Big Data & AI</span>
             </h2>
             <p class="section-subtitle">
-              Étudiante de 5ème année d'Ingénierie, je cherche à m'intégrer à des projets innovants combinant l'analyse de données, le Deep Learning et l'intégration IoT.
+              Étudiante de 5ème année d'Ingénierie, je cherche à m'intégrer à des projets innovants combinant l'analyse
+              de données, le Deep Learning et l'intégration IoT.
             </p>
             <div class="card">
               <p style="font-size:0.9rem; color:#cbd5f5; margin-bottom:0.9rem;">
-                Je suis passionnée par la concrétisation des concepts d'<strong>Intelligence Artificielle</strong> et de <strong>Data Science</strong> en solutions concrètes, comme le développement de cobots de recommandation (NLP, GPT-40) ou la prédiction d'anomalies (Autoencoder, LSTM, CNN).
+                Je suis passionnée par la concrétisation des concepts d'<strong>Intelligence Artificielle</strong> et de
+                <strong>Data Science</strong> en solutions concrètes, comme le développement de cobots de recommandation
+                (NLP, GPT-40) ou la prédiction d'anomalies (Autoencoder, LSTM, CNN).
               </p>
               <p style="font-size:0.9rem; color:#cbd5f5;">
-                Mon parcours m'a permis d'acquérir une solide base technique sur toute la chaîne de valeur de la donnée, des technologies Big Data (Hadoop, Spark) aux outils de visualisation (Power BI, Tableau).
+                Mon parcours m'a permis d'acquérir une solide base technique sur toute la chaîne de valeur de la donnée,
+                des technologies Big Data (Hadoop, Spark) aux outils de visualisation (Power BI, Tableau).
               </p>
               <div class="tags">
                 <span class="tag tag-strong">Data Science & AI</span>
@@ -940,7 +1082,8 @@
             <span class="badge">Data, AI & Big Data</span>
           </h2>
           <p class="section-subtitle">
-            Un ensemble complet de compétences allant du développement logiciel à la gestion d'infrastructures Big Data et à la modélisation d'Intelligence Artificielle.
+            Un ensemble complet de compétences allant du développement logiciel à la gestion d'infrastructures Big Data
+            et à la modélisation d'Intelligence Artificielle.
           </p>
         </div>
 
@@ -1023,90 +1166,250 @@
       <div class="container">
         <div class="reveal">
           <h2 class="section-title">
-            Projets Académiques
-            <span class="badge">AI & Data Science</span>
+            Projets & Réalisations
+            <span class="badge">Open Source & Académique</span>
           </h2>
           <p class="section-subtitle">
-            Projets appliqués en Intelligence Artificielle et Data Science, démontrant une capacité à gérer la donnée du scraping à la modélisation avancée (Deep Learning).
+            Une sélection de mes travaux en Intelligence Artificielle, Big Data et IoT, tous disponibles sur GitHub.
           </p>
         </div>
 
-        <div class="grid grid-2">
+        <div class="grid grid-2 grid-3">
+          <!-- Projet 1 -->
           <div class="reveal">
-            <div class="card">
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-item-title">Détection d'Émotions Faciales en Temps Réel</div>
-                  <div class="timeline-item-meta">CNN · TensorFlow/Keras · OpenCV</div>
-                  <div class="timeline-item-body">
-                    <ul>
-                      <li>Construction d'un système de détection et de classification d'émotions faciales en temps réel.</li>
-                      <li>Utilisation des Réseaux Neuronaux Convolutifs (CNN) pour la classification.</li>
-                    </ul>
-                  </div>
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">DARIJAFLOW</div>
+                <div class="skill-item-title">Speech-to-Text & Translation</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Plateforme d'IA pour la transcription du Darija en temps réel avec traduction anglaise intégrée.
+                </p>
+                <div class="tags">
+                  <span class="tag">NLP</span>
+                  <span class="tag">Python</span>
+                  <span class="tag">AI</span>
                 </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-item-title">Prédiction Boursière (Nifty 50)</div>
-                  <div class="timeline-item-meta">CNN · LSTM · Transformation 2D</div>
-                  <div class="timeline-item-body">
-                    <ul>
-                      <li>Prédiction du prix de l'indice boursier Nifty 50 en utilisant des modèles hybrides CNN et LSTM.</li>
-                      <li>Transformation des données de séries temporelles en histogrammes 2D pour le traitement par CNN.</li>
-                    </ul>
-                  </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-item-title">Analyse d'Espérance de Vie Mondiale</div>
-                    <div class="timeline-item-meta">Régression Linéaire · Random Forest · SVR</div>
-                    <div class="timeline-item-body">
-                      <ul>
-                        <li>Analyse des facteurs influençant l'espérance de vie, atteignant un score R² de 0.949.</li>
-                        <li>Application de différents modèles de Machine Learning pour la comparaison des performances.</li>
-                      </ul>
-                    </div>
-                  </div>
               </div>
+              <a href="https://github.com/HibvKh/Darija-Speech-to-Text-with-Real-Time-English-Translation-An-AI-Powered-Web-Platform"
+                target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
             </div>
           </div>
 
+          <!-- Projet 2 -->
           <div class="reveal">
-            <div class="card">
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-item-title">DARIJAFLOW - Classification du Dialecte Darija</div>
-                  <div class="timeline-item-meta">CNN · RNN · Transformers · IoT</div>
-                  <div class="timeline-item-body">
-                    <ul>
-                      <li>Développement d'un système pour classifier les dialectes Darija (marocain).</li>
-                      <li>Intégration du Speech-to-Text, de la traduction et de l'IoT via des modèles avancés (CNNs, RNNs, Transformers).</li>
-                    </ul>
-                  </div>
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Cobot de Recommandation</div>
+                <div class="skill-item-title">Microsoft Learn Assistant</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Assistant intelligent recommandant des formations Microsoft Learn via scraping et NLP.
+                </p>
+                <div class="tags">
+                  <span class="tag">GPT-4o</span>
+                  <span class="tag">Scraping</span>
+                  <span class="tag">NLP</span>
                 </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-item-title">Comparaison de Plateformes de Streaming (VizStream)</div>
-                  <div class="timeline-item-meta">Web Scraping · NLP · Streamlit</div>
-                  <div class="timeline-item-body">
-                    <ul>
-                      <li>Comparaison de plateformes (Twitch, Kick, Nimo TV, Trovo) via Web Scraping.</li>
-                      <li>Utilisation de NLP et de visualisations interactives avec Streamlit pour l'analyse.</li>
-                    </ul>
-                  </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-item-title">Contrôle de LED par Détection de Geste</div>
-                    <div class="timeline-item-meta">Arduino · OpenCV · Python</div>
-                    <div class="timeline-item-body">
-                      <ul>
-                        <li>Système intelligent liant la détection du nombre de doigts (OpenCV) à une carte Arduino Uno.</li>
-                        <li>Permet d'allumer automatiquement le même nombre de LEDs, illustrant l'intégration IoT.</li>
-                      </ul>
-                    </div>
-                  </div>
               </div>
+              <a href="https://github.com/HibvKh/Cobot-Intelligent-de-Recommandation-et-analyse-de-Formations-Microsoft-Learn"
+                target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 3 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Stage OCP</div>
+                <div class="skill-item-title">Surveillance IoT & IA</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Application de surveillance en temps réel utilisant l'IoT et l'IA pour la maintenance prédictive.
+                </p>
+                <div class="tags">
+                  <span class="tag">IoT</span>
+                  <span class="tag">IA</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/Stage-OCP-Surveillance-des-v-hicules-alerte-et-s-curit-"
+                target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 4 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">VizStream</div>
+                <div class="skill-item-title">Streaming Guide & Viz</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Guide ultime du streaming et de la visualisation de données via Web Scraping et Streamlit.
+                </p>
+                <div class="tags">
+                  <span class="tag">Python</span>
+                  <span class="tag">Streamlit</span>
+                  <span class="tag">Web Scraping</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/VizStream" target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 5 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Prediction Boursière</div>
+                <div class="skill-item-title">CNN & LSTM Hybrid</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Prédiction de l'indice Nifty 50 en utilisant des modèles hybrides CNN et LSTM.
+                </p>
+                <div class="tags">
+                  <span class="tag">Deep Learning</span>
+                  <span class="tag">LSTM</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/stock-marcket-prediction-CNN-from-scratch-LSTM-" target="_blank"
+                class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 6 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Somnolence Conducteur</div>
+                <div class="skill-item-title">Driver Safety AI</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Système basé sur l'IA pour la détection en temps réel de la somnolence du conducteur.
+                </p>
+                <div class="tags">
+                  <span class="tag">Computer Vision</span>
+                  <span class="tag">OpenCV</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/d-tection-de-somnolence-du-conducteur" target="_blank"
+                class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 7 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">LED Hand Control</div>
+                <div class="skill-item-title">Gesture Recognition IoT</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Contrôle intelligent des lampes par gestes de la main via vision par ordinateur et Arduino.
+                </p>
+                <div class="tags">
+                  <span class="tag">Arduino</span>
+                  <span class="tag">OpenCV</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/Led-Hand-Control" target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 8 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Sentiment Analysis</div>
+                <div class="skill-item-title">IMDb Review Prediction</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Scraping et analyse sentimentale des critiques IMDb pour prédire le succès des films.
+                </p>
+                <div class="tags">
+                  <span class="tag">NLP</span>
+                  <span class="tag">Scraping</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/Web-Scraping-et-Analyse-Sentimentale-des-Critiques-IMDb-pour-la-Pr-diction-des-Films-Top-10"
+                target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 9 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Business Intelligence</div>
+                <div class="skill-item-title">Retail Sales Analysis</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Solution BI pour l'analyse et la gestion des ventes des supermarchés.
+                </p>
+                <div class="tags">
+                  <span class="tag">Power BI</span>
+                  <span class="tag">SQL</span>
+                  <span class="tag">Data Viz</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/Analyse-et-la-Gestion-des-Ventes-des-Supermarch-s-BI" target="_blank"
+                class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 10 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Emotion Detection</div>
+                <div class="skill-item-title">Facial Expressions AI</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Système de détection et classification des émotions faciales via Deep Learning (CNN).
+                </p>
+                <div class="tags">
+                  <span class="tag">CNN</span>
+                  <span class="tag">TensorFlow</span>
+                  <span class="tag">Keras</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/facial-emotions-detection" target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Projet 11 -->
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Life Expectancy</div>
+                <div class="skill-item-title">Machine Learning Model</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
+                  Analyse et prédiction des facteurs d'espérance de vie mondiale (R² = 0.949).
+                </p>
+                <div class="tags">
+                  <span class="tag">ML</span>
+                  <span class="tag">Regression</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <a href="https://github.com/HibvKh/Life_Expectancy-machine-learning" target="_blank" class="project-link">
+                Voir sur GitHub <span>↗</span>
+              </a>
             </div>
           </div>
         </div>
@@ -1121,7 +1424,8 @@
             <span class="badge">Professionnelles</span>
           </h2>
           <p class="section-subtitle">
-            Application des compétences en IA et Big Data au travers de stages centrés sur la recommandation intelligente et la maintenance prédictive.
+            Application des compétences en IA et Big Data au travers de stages centrés sur la recommandation
+            intelligente et la maintenance prédictive.
           </p>
         </div>
 
@@ -1135,10 +1439,16 @@
                 </div>
                 <div class="timeline-item-body">
                   <ul>
-                    <li>Développement d'un cobot de recommandation intelligent pour Microsoft Learn, combinant Data Science et IA.</li>
+                    <li>Développement d'un cobot de recommandation intelligent pour Microsoft Learn, combinant Data
+                      Science et IA.</li>
                     <li>Intégration de NLP, de Machine Learning et du modèle GPT-40.</li>
-                    <li>Création d'une interface web interactive (HTML, CSS, JavaScript) pour des recommandations personnalisées.</li>
+                    <li>Création d'une interface web interactive (HTML, CSS, JavaScript) pour des recommandations
+                      personnalisées.</li>
                   </ul>
+                  <a href="https://github.com/HibvKh/Cobot-Intelligent-de-Recommandation-et-analyse-de-Formations-Microsoft-Learn"
+                    target="_blank" class="project-link" style="margin-top:0.5rem;">
+                    Code source GitHub <span>↗</span>
+                  </a>
                 </div>
               </div>
               <div class="timeline-item">
@@ -1152,6 +1462,10 @@
                     <li>Application des modèles Autoencoder, LSTM et CNN.</li>
                     <li>Contribution au suivi en temps réel de plus de 50 véhicules.</li>
                   </ul>
+                  <a href="https://github.com/HibvKh/Stage-OCP-Surveillance-des-v-hicules-alerte-et-s-curit-"
+                    target="_blank" class="project-link" style="margin-top:0.5rem;">
+                    Code source GitHub <span>↗</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -1174,7 +1488,8 @@
             <span class="badge">Ce que j'apporte</span>
           </h2>
           <p class="section-subtitle">
-            Grâce à ma formation en Big Data et IA, je suis capable de couvrir l'ensemble du cycle de vie des projets Data, de la collecte à la mise en production des modèles.
+            Grâce à ma formation en Big Data et IA, je suis capable de couvrir l'ensemble du cycle de vie des projets
+            Data, de la collecte à la mise en production des modèles.
           </p>
         </div>
 
@@ -1183,7 +1498,8 @@
             <div class="service-icon">🧠</div>
             <div class="service-title">Développement de Modèles AI</div>
             <div class="service-body">
-              Conception et entraînement de modèles de Deep Learning (CNN, LSTM, Transformers) pour la classification, la prédiction de séries temporelles ou le traitement du langage naturel.
+              Conception et entraînement de modèles de Deep Learning (CNN, LSTM, Transformers) pour la classification,
+              la prédiction de séries temporelles ou le traitement du langage naturel.
             </div>
             <span class="service-chip">Deep Learning</span>
           </div>
@@ -1192,7 +1508,8 @@
             <div class="service-icon">📊</div>
             <div class="service-title">Analyse et Visualisation de Données</div>
             <div class="service-body">
-              Nettoyage, analyse exploratoire (EDA) et création de tableaux de bord interactifs (Power BI, Tableau) pour transformer les données brutes en informations exploitables.
+              Nettoyage, analyse exploratoire (EDA) et création de tableaux de bord interactifs (Power BI, Tableau) pour
+              transformer les données brutes en informations exploitables.
             </div>
             <span class="service-chip">Power BI · Tableau</span>
           </div>
@@ -1201,7 +1518,8 @@
             <div class="service-icon">⛓️</div>
             <div class="service-title">Big Data Pipeline Design</div>
             <div class="service-body">
-              Mise en place d'architectures de traitement de données volumineuses et distribuées avec l'écosystème Hadoop, Spark pour le calcul et Kafka pour le streaming.
+              Mise en place d'architectures de traitement de données volumineuses et distribuées avec l'écosystème
+              Hadoop, Spark pour le calcul et Kafka pour le streaming.
             </div>
             <span class="service-chip">Hadoop · Spark · Kafka</span>
           </div>
@@ -1210,7 +1528,8 @@
             <div class="service-icon">💻</div>
             <div class="service-title">Projets Python End-to-End</div>
             <div class="service-body">
-              Développement d'applications complètes basées sur Python, intégrant des bases de données (SQL/NoSQL) et des solutions de web scraping.
+              Développement d'applications complètes basées sur Python, intégrant des bases de données (SQL/NoSQL) et
+              des solutions de web scraping.
             </div>
             <span class="service-chip">Python · SQL · MongoDB</span>
           </div>
@@ -1219,7 +1538,8 @@
             <div class="service-icon">🌐</div>
             <div class="service-title">IoT et Systèmes Connectés</div>
             <div class="service-body">
-              Conception de systèmes intelligents (comme le contrôle par geste) intégrant des capteurs, des microcontrôleurs (Arduino/Raspberry Pi) et des applications logicielles.
+              Conception de systèmes intelligents (comme le contrôle par geste) intégrant des capteurs, des
+              microcontrôleurs (Arduino/Raspberry Pi) et des applications logicielles.
             </div>
             <span class="service-chip">Arduino · OpenCV · IoT</span>
           </div>
@@ -1228,7 +1548,8 @@
             <div class="service-icon">📚</div>
             <div class="service-title">Mentorat & Formation Technique</div>
             <div class="service-body">
-              Partage de connaissances sur des sujets comme Excel, SQL, Python ou Power BI pour aider les équipes non techniques à monter en compétence sur la culture Data.
+              Partage de connaissances sur des sujets comme Excel, SQL, Python ou Power BI pour aider les équipes non
+              techniques à monter en compétence sur la culture Data.
             </div>
             <span class="service-chip">Formation</span>
           </div>
@@ -1244,7 +1565,8 @@
             <span class="badge">Compétences Digitales</span>
           </h2>
           <p class="section-subtitle">
-            Certifications formelles complétant ma formation académique et validant des compétences pratiques essentielles dans l'ère numérique.
+            Certifications formelles complétant ma formation académique et validant des compétences pratiques
+            essentielles dans l'ère numérique.
           </p>
         </div>
 
@@ -1255,7 +1577,8 @@
                 <div class="timeline-item-title">Professional Development Skills for The Digital Age</div>
                 <div class="timeline-item-meta">ALX</div>
                 <div class="timeline-item-body">
-                  Développement de compétences professionnelles essentielles pour réussir dans l'environnement de travail numérique actuel.
+                  Développement de compétences professionnelles essentielles pour réussir dans l'environnement de
+                  travail numérique actuel.
                 </div>
               </div>
               <div class="timeline-item">
@@ -1269,7 +1592,8 @@
                 <div class="timeline-item-title">SQL / Python</div>
                 <div class="timeline-item-meta">Udemy</div>
                 <div class="timeline-item-body">
-                  Compétences en gestion de bases de données relationnelles (SQL) et en programmation fondamentale pour la Data Science (Python).
+                  Compétences en gestion de bases de données relationnelles (SQL) et en programmation fondamentale pour
+                  la Data Science (Python).
                 </div>
               </div>
             </div>
@@ -1341,7 +1665,8 @@
             <span class="badge">Engagement & Hobbies</span>
           </h2>
           <p class="section-subtitle">
-            Mon engagement associatif et mes loisirs démontrent mon esprit d'équipe, mon organisation et ma passion pour le sport.
+            Mon engagement associatif et mes loisirs démontrent mon esprit d'équipe, mon organisation et ma passion pour
+            le sport.
           </p>
         </div>
 
@@ -1352,7 +1677,8 @@
                 <div class="timeline-item-title">Responsabilités Associatives</div>
                 <div class="timeline-item-meta">Press EnsaTe IT & Media Manager, Ensate Press HR Manager</div>
                 <div class="timeline-item-body">
-                  Gestion de l'informatique et des médias pour les associations étudiantes et le club sportif (Sports Club IT & Media Manager).
+                  Gestion de l'informatique et des médias pour les associations étudiantes et le club sportif (Sports
+                  Club IT & Media Manager).
                 </div>
               </div>
 
@@ -1387,7 +1713,8 @@
             <span class="badge">Collaborons</span>
           </h2>
           <p class="section-subtitle">
-            Intéressé(e) par mon profil pour un PFE, un projet en IA/Big Data ou une collaboration académique ? Contactez-moi !
+            Intéressé(e) par mon profil pour un PFE, un projet en IA/Big Data ou une collaboration académique ?
+            Contactez-moi !
           </p>
         </div>
 
@@ -1403,7 +1730,8 @@
                 <dd><a href="tel:+212656289494">+212 656 289 494</a></dd>
 
                 <dt>LinkedIn</dt>
-                <dd><a href="https://www.linkedin.com/in/kharfasse-hiba-344250316/" target="_blank">linkedin.com/in/kharfasse-hiba-344250316/</a></dd>
+                <dd><a href="https://www.linkedin.com/in/kharfasse-hiba-344250316/"
+                    target="_blank">linkedin.com/in/kharfasse-hiba-344250316/</a></dd>
 
                 <dt>GitHub</dt>
                 <dd><a href="https://github.com/HibvKh" target="_blank">github.com/HibvKh</a></dd>
@@ -1428,21 +1756,22 @@
               <div>
                 <div class="skill-group-title">Réseaux Sociaux</div>
                 <p class="contact-note">
-                  Le moyen le plus rapide de me joindre est via LinkedIn. Je suis toujours disponible pour discuter de la Data, de l'IA et des opportunités d'apprentissage.
+                  Le moyen le plus rapide de me joindre est via LinkedIn. Je suis toujours disponible pour discuter de
+                  la Data, de l'IA et des opportunités d'apprentissage.
                 </p>
               </div>
               <div style="display:flex; flex-wrap:wrap; gap:0.7rem;">
                 <a class="btn btn-primary" target="_blank" rel="noopener noreferrer"
-                   href="https://www.linkedin.com/in/kharfasse-hiba-344250316/">
+                  href="https://www.linkedin.com/in/kharfasse-hiba-344250316/">
                   LinkedIn <span class="btn-icon">💼</span>
                 </a>
-                <a class="btn btn-ghost" target="_blank" rel="noopener noreferrer"
-                   href="https://github.com/HibvKh">
+                <a class="btn btn-ghost" target="_blank" rel="noopener noreferrer" href="https://github.com/HibvKh">
                   GitHub
                 </a>
               </div>
               <p class="contact-note">
-                Je m'efforce de répondre rapidement aux messages, en particulier ceux qui proposent des objectifs ou des opportunités claires.
+                Je m'efforce de répondre rapidement aux messages, en particulier ceux qui proposent des objectifs ou des
+                opportunités claires.
               </p>
             </div>
           </div>
@@ -1457,10 +1786,19 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Smooth scroll for internal links
+      // Check if GSAP is loaded
+      if (typeof gsap === "undefined") {
+        console.warn("GSAP not loaded. Fallback to basic visibility.");
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      // --- SETUP ---
       const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
       const navList = document.querySelector(".nav-links");
       const navToggle = document.querySelector(".nav-toggle");
+      const navbarWrapper = document.querySelector(".navbar-wrapper");
 
       function closeMobileNav() {
         if (navList && navList.classList.contains("open")) {
@@ -1468,26 +1806,112 @@
         }
       }
 
+      // --- SMOOTH SCROLL ---
       navLinks.forEach((link) => {
         link.addEventListener("click", function (event) {
           event.preventDefault();
           const targetId = this.getAttribute("href");
           const target = document.querySelector(targetId);
           if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            gsap.to(window, {
+              duration: 1.2,
+              scrollTo: { y: target, offsetY: 80 },
+              ease: "power4.inOut"
+            });
           }
           closeMobileNav();
         });
       });
 
-      // Mobile nav toggle
+      // --- MOBILE NAV ---
       if (navToggle && navList) {
         navToggle.addEventListener("click", function () {
           navList.classList.toggle("open");
         });
       }
 
-      // Hero typewriter animation
+      // --- HERO INTRO ---
+      const heroTl = gsap.timeline();
+      heroTl.from(".navbar", { y: -100, opacity: 0, duration: 1.2, ease: "power4.out" })
+        .from(".hero-left > *", { y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" }, "-=0.6")
+        .from(".hero-right", { scale: 0.9, opacity: 0, duration: 1, ease: "back.out(1.7)" }, "-=1");
+
+      // --- REVEAL ON SCROLL ---
+      document.querySelectorAll(".reveal").forEach((item) => {
+        const parent = item.parentElement;
+        if (parent && (parent.classList.contains("grid") || parent.classList.contains("services-grid") || parent.classList.contains("skills-grid"))) {
+          return;
+        }
+
+        gsap.from(item, {
+          scrollTrigger: {
+            trigger: item,
+            start: "top 88%",
+            toggleActions: "play none none none"
+          },
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out"
+        });
+      });
+
+      // --- STAGGERED GRIDS ---
+      const grids = document.querySelectorAll(".grid, .services-grid, .skills-grid");
+      grids.forEach(grid => {
+        gsap.from(grid.children, {
+          scrollTrigger: {
+            trigger: grid,
+            start: "top 85%"
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power2.out"
+        });
+      });
+
+      // --- SKILL BARS ---
+      const skillBars = document.querySelectorAll(".skill-progress");
+      skillBars.forEach(bar => {
+        const percent = bar.getAttribute("data-percent") || "0";
+        gsap.to(bar, {
+          scrollTrigger: {
+            trigger: bar,
+            start: "top 92%"
+          },
+          width: percent + "%",
+          duration: 1.5,
+          ease: "expo.out"
+        });
+      });
+
+      // --- MAGNETIC BUTTONS ---
+      const btns = document.querySelectorAll(".btn");
+      btns.forEach(btn => {
+        btn.addEventListener("mousemove", (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          gsap.to(btn, {
+            x: x * 0.2,
+            y: y * 0.2,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+        btn.addEventListener("mouseleave", () => {
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.5,
+            ease: "elastic.out(1, 0.4)"
+          });
+        });
+      });
+
+      // --- TYPEWRITER ---
       const typewriterEl = document.querySelector(".hero-typewriter");
       if (typewriterEl) {
         const text = typewriterEl.getAttribute("data-text") || "";
@@ -1495,80 +1919,37 @@
         let deleting = false;
 
         function type() {
+          const currentText = text.slice(0, index);
+          typewriterEl.textContent = currentText;
+
           if (!deleting && index <= text.length) {
-            typewriterEl.textContent = text.slice(0, index);
             index++;
           } else if (deleting && index >= 0) {
-            typewriterEl.textContent = text.slice(0, index);
             index--;
           }
 
-          if (index === text.length + 8) {
+          let speed = deleting ? 40 : 80;
+          if (!deleting && index === text.length + 1) {
+            speed = 2500;
             deleting = true;
-          } else if (index === 0) {
+          } else if (deleting && index === 0) {
+            speed = 1000;
             deleting = false;
           }
+
+          setTimeout(type, speed);
         }
-
-        setInterval(type, 100);
+        setTimeout(type, 2000);
       }
 
-      // Reveal on scroll animation
-      const revealEls = document.querySelectorAll(".reveal");
-
-      function handleReveal() {
-        const trigger = window.innerHeight * 0.86;
-        revealEls.forEach((el) => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < trigger) {
-            el.classList.add("active");
-          }
-        });
-      }
-
-      handleReveal();
-      window.addEventListener("scroll", handleReveal);
-
-      // Animated skill bars
-      const skillBars = document.querySelectorAll(".skill-progress");
-      const filledBars = new WeakSet();
-
-      function animateSkills() {
-        const trigger = window.innerHeight * 0.9;
-        skillBars.forEach((bar) => {
-          const rect = bar.getBoundingClientRect();
-          if (rect.top < trigger && !filledBars.has(bar)) {
-            const percent = bar.getAttribute("data-percent") || "0";
-            bar.style.width = percent + "%";
-            filledBars.add(bar);
-          }
-        });
-      }
-
-      animateSkills();
-      window.addEventListener("scroll", animateSkills);
-
-      // Highlight active section in nav
-      const sectionIds = [
-        "#about",
-        "#skills",
-        "#projects",
-        "#experience",
-        "#services",
-        "#certifications",
-        "#education",
-        "#extracurricular",
-        "#get-in-touch",
-      ];
-      const sectionEls = sectionIds
-        .map((id) => document.querySelector(id))
-        .filter(Boolean);
-
+      // --- NAVIGATION ACTIONS ---
       function highlightNav() {
+        const sectionIds = ["#about", "#skills", "#projects", "#experience", "#services", "#certifications", "#education", "#extracurricular", "#get-in-touch"];
+        const sectionEls = sectionIds.map(id => document.querySelector(id)).filter(Boolean);
         let currentId = null;
-        const scrollPos = window.scrollY + window.innerHeight * 0.25;
+        const scrollPos = window.scrollY + window.innerHeight * 0.3;
 
-        sectionEls.forEach((section) => {
+        sectionEls.forEach(section => {
           const top = section.offsetTop;
           const bottom = top + section.offsetHeight;
           if (scrollPos >= top && scrollPos < bottom) {
@@ -1576,18 +1957,22 @@
           }
         });
 
-        navLinks.forEach((link) => {
-          if (link.getAttribute("href") === currentId) {
-            link.classList.add("active");
-          } else {
-            link.classList.remove("active");
-          }
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === currentId);
         });
+
+        // Scrolled class toggle
+        if (window.scrollY > 50) {
+          navbarWrapper.classList.add("scrolled");
+        } else {
+          navbarWrapper.classList.remove("scrolled");
+        }
       }
 
-      highlightNav();
       window.addEventListener("scroll", highlightNav);
+      highlightNav();
     });
   </script>
 </body>
+
 </html>
