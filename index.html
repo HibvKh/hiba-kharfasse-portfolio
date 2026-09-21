@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Hiba Kharfasse | Big Data & AI Engineering</title>
+  <title>Hiba Kharfasse | Big Data & AI Engineer · M2 DKAI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -564,6 +564,8 @@
 
     .hero-card {
       position: relative;
+      display: flex;
+      flex-direction: column;
       padding: 1.6rem 1.7rem;
       border-radius: var(--radius-lg);
       background: radial-gradient(circle at top left, rgba(187, 134, 252, 0.22), rgba(22, 27, 34, 0.95));
@@ -600,17 +602,30 @@
     }
 
     .hero-card-badge {
-      position: absolute;
-      bottom: 0.9rem;
-      right: 1.1rem;
+      position: static;
+      align-self: flex-end;
+      margin-top: 1rem;
+      max-width: 100%;
       font-size: 0.7rem;
-      padding: 0.25rem 0.7rem;
+      line-height: 1.25;
+      padding: 0.35rem 0.75rem;
       border-radius: var(--radius-pill);
       border: 1px solid rgba(187, 134, 252, 0.6);
       background: rgba(22, 27, 34, 0.95);
       color: var(--primary-soft);
       text-transform: uppercase;
       letter-spacing: 0.12em;
+      text-align: center;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 640px) {
+      .hero-card-badge {
+        align-self: flex-start;
+        white-space: normal;
+        width: fit-content;
+      }
     }
 
     /* Skills */
@@ -927,8 +942,40 @@
         margin-bottom: 1.1rem;
       }
     }
+
+    /* Bilingual language switch */
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.3rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(187, 134, 252, 0.45);
+      background: rgba(22, 27, 34, 0.75);
+      color: var(--text-muted);
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+    .lang-option { transition: all 0.2s ease; }
+    .lang-option.active {
+      color: var(--primary-soft);
+      text-shadow: 0 0 12px rgba(187, 134, 252, 0.55);
+    }
+    .lang-switch:hover { border-color: rgba(187, 134, 252, 0.8); }
+    .hero-typewriter-static {
+      min-height: 1.4rem;
+      font-size: 0.9rem;
+      color: var(--primary-soft);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.7rem;
+    }
   </style>
 </head>
+
 
 <body>
   <div class="bg-blobs">
@@ -939,22 +986,28 @@
 
   <div class="navbar-wrapper">
     <header class="navbar">
-      <div class="logo">
-        <span>Hiba</span> Kharfasse
-      </div>
+      <div class="logo"><span>Hiba</span> Kharfasse</div>
+
       <button class="nav-toggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
       </button>
+
       <ul class="nav-links">
-        <li><a href="#about">À Propos</a></li>
-        <li><a href="#skills">Compétences</a></li>
-        <li><a href="#projects">Projets</a></li>
-        <li><a href="#experience">Expériences</a></li>
-        <li><a href="#services">Expertise</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#education">Formation</a></li>
-        <li><a href="#extracurricular">Vie Associative</a></li>
-        <li><a href="#get-in-touch">Contact</a></li>
+        <li><a href="#about" data-fr="À Propos" data-en="About">À Propos</a></li>
+        <li><a href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a></li>
+        <li><a href="#projects" data-fr="Projets" data-en="Projects">Projets</a></li>
+        <li><a href="#experience" data-fr="Expériences" data-en="Experience">Expériences</a></li>
+        <li><a href="#education" data-fr="Formation" data-en="Education">Formation</a></li>
+        <li><a href="#certifications" data-fr="Certifications" data-en="Certifications">Certifications</a></li>
+        <li><a href="#extracurricular" data-fr="Vie associative" data-en="Activities">Vie associative</a></li>
+        <li><a href="#get-in-touch" data-fr="Contact" data-en="Contact">Contact</a></li>
+        <li>
+          <button class="lang-switch" id="langToggle" type="button" aria-label="Switch language">
+            <span class="lang-option active" data-lang="fr">FR</span>
+            <span class="lang-separator">/</span>
+            <span class="lang-option" data-lang="en">EN</span>
+          </button>
+        </li>
       </ul>
     </header>
   </div>
@@ -965,48 +1018,56 @@
         <div class="hero-left">
           <div class="hero-tagline">
             <span class="hero-tagline-dot"></span>
-            BIG DATA · AI ENGINEER ORIENTED
+            <span data-fr="BIG DATA · IA · DATA SCIENCE" data-en="BIG DATA · AI · DATA SCIENCE">BIG DATA · IA · DATA SCIENCE</span>
           </div>
-          <h1 class="hero-heading">
-            Hiba <span class="accent">Kharfasse</span>
-          </h1>
-          <p class="hero-sub">
-            Étudiante en 5ème année d'Ingénierie en Big Data et Intelligence Artificielle à l'ENSA Tétouan. Je suis à la
-            recherche d'un stage de fin d'études (PFE) pour appliquer mes connaissances en IA, data science et systèmes
-            connectés.
+
+          <h1 class="hero-heading">Hiba <span class="accent">Kharfasse</span></h1>
+
+          <p class="hero-sub"
+             data-fr="Ingénieure d'État en Big Data & Intelligence Artificielle, actuellement en Master 2 Data, Knowledge and Hybrid AI (DKAI) à l'Université Paris-Saclay. Je m'intéresse à l'IA générative, au NLP, à la Data Science et aux systèmes intelligents."
+             data-en="Big Data & Artificial Intelligence State Engineer, currently pursuing a Master 2 in Data, Knowledge and Hybrid AI (DKAI) at Université Paris-Saclay. Interested in Generative AI, NLP, Data Science and intelligent systems.">
+            Ingénieure d'État en Big Data & Intelligence Artificielle, actuellement en Master 2 Data, Knowledge and Hybrid AI (DKAI) à l'Université Paris-Saclay. Je m'intéresse à l'IA générative, au NLP, à la Data Science et aux systèmes intelligents.
           </p>
-          <p class="hero-typewriter"
-            data-text="Passionnée par les technologies intelligentes, Data Science et Deep Learning."></p>
+
+          <p class="hero-typewriter-static"
+             data-fr="IA générative · NLP · Machine Learning · Big Data"
+             data-en="Generative AI · NLP · Machine Learning · Big Data">
+            IA générative · NLP · Machine Learning · Big Data
+          </p>
+
           <div class="hero-actions">
             <a href="#get-in-touch" class="btn btn-primary">
-              Me contacter <span class="btn-icon">↗</span>
+              <span data-fr="Me contacter" data-en="Contact me">Me contacter</span> <span class="btn-icon">↗</span>
             </a>
             <a href="https://github.com/HibvKh" target="_blank" class="btn btn-ghost">
-              Mon GitHub
+              GitHub
             </a>
           </div>
+
           <div class="hero-mini">
             <span class="pill pill-strong">
-              <span class="pill-dot"></span> Tétouan · Maroc
+              <span class="pill-dot"></span>
+              <span data-fr="Université Paris-Saclay · France" data-en="Université Paris-Saclay · France">Université Paris-Saclay · France</span>
             </span>
             <span class="pill">
-              <span class="pill-dot"></span> Big Data & AI Engineering @ ENSA Tétouan
+              <span class="pill-dot"></span>
+              <span data-fr="M2 DKAI · 2026–2027" data-en="M2 DKAI · 2026–2027">M2 DKAI · 2026–2027</span>
             </span>
           </div>
         </div>
 
         <aside class="hero-right">
           <div class="hero-card">
-            <div class="hero-card-title">Aperçu du profil</div>
+            <div class="hero-card-title" data-fr="Aperçu du profil" data-en="Profile overview">Aperçu du profil</div>
             <div class="hero-name">Hiba Kharfasse</div>
-            <div class="hero-role">Étudiante Ingénieure Big Data & AI</div>
+            <div class="hero-role" data-fr="Big Data & AI Engineer · M2 DKAI" data-en="Big Data & AI Engineer · M2 DKAI">Big Data & AI Engineer · M2 DKAI</div>
             <div class="hero-meta">
-              <div>• Forte expertise en Python, Deep Learning (TensorFlow, Keras)</div>
-              <div>• Maîtrise des technologies Big Data : Hadoop, Spark, Kafka</div>
-              <div>• Intérêt pour l'analyse de données, l'IoT et les systèmes connectés</div>
-              <div>• Compétences en visualisation de données (Power BI, Tableau)</div>
+              <div data-fr="• Python, Machine Learning, Deep Learning & NLP" data-en="• Python, Machine Learning, Deep Learning & NLP">• Python, Machine Learning, Deep Learning & NLP</div>
+              <div data-fr="• LLMs, RAG, LangChain, vector databases & Generative AI" data-en="• LLMs, RAG, LangChain, vector databases & Generative AI">• LLMs, RAG, LangChain, vector databases & Generative AI</div>
+              <div data-fr="• Big Data : Spark, Hadoop, Hive, Kafka, Airflow" data-en="• Big Data: Spark, Hadoop, Hive, Kafka, Airflow">• Big Data : Spark, Hadoop, Hive, Kafka, Airflow</div>
+              <div data-fr="• OCR, extraction documentaire & chatbots intelligents" data-en="• OCR, document extraction & intelligent chatbots">• OCR, extraction documentaire & chatbots intelligents</div>
             </div>
-            <div class="hero-card-badge">Ouverte aux PFE</div>
+            <div class="hero-card-badge" data-fr="Disponible pour stage" data-en="Open to internships">Disponible pour stage</div>
           </div>
         </aside>
       </div>
@@ -1019,54 +1080,56 @@
         <div class="grid grid-2">
           <div class="reveal">
             <h2 class="section-title">
-              À Propos
-              <span class="badge">Big Data & AI</span>
+              <span data-fr="À Propos" data-en="About">À Propos</span>
+              <span class="badge" data-fr="Big Data & AI" data-en="Big Data & AI">Big Data & AI</span>
             </h2>
-            <p class="section-subtitle">
-              Étudiante de 5ème année d'Ingénierie, je cherche à m'intégrer à des projets innovants combinant l'analyse
-              de données, le Deep Learning et l'intégration IoT.
+            <p class="section-subtitle"
+               data-fr="Un parcours d'ingénierie en Big Data & IA complété par un Master 2 à Paris-Saclay, avec des expériences concrètes en IA générative, NLP, OCR et Data Engineering."
+               data-en="A Big Data & AI engineering background complemented by a Master 2 at Paris-Saclay, with hands-on experience in Generative AI, NLP, OCR and Data Engineering.">
+              Un parcours d'ingénierie en Big Data & IA complété par un Master 2 à Paris-Saclay, avec des expériences concrètes en IA générative, NLP, OCR et Data Engineering.
             </p>
+
             <div class="card">
-              <p style="font-size:0.9rem; color:#cbd5f5; margin-bottom:0.9rem;">
-                Je suis passionnée par la concrétisation des concepts d'<strong>Intelligence Artificielle</strong> et de
-                <strong>Data Science</strong> en solutions concrètes, comme le développement de cobots de recommandation
-                (NLP, GPT-40) ou la prédiction d'anomalies (Autoencoder, LSTM, CNN).
+              <p style="font-size:0.9rem; color:#cbd5f5; margin-bottom:0.9rem;"
+                 data-fr="Je conçois des solutions IA orientées vers des besoins réels : extraction et structuration de documents, assistants et chatbots, recommandation, analyse de données et modèles de Machine Learning."
+                 data-en="I build AI solutions for real-world needs: document extraction and structuring, assistants and chatbots, recommendation systems, data analysis and Machine Learning models.">
+                Je conçois des solutions IA orientées vers des besoins réels : extraction et structuration de documents, assistants et chatbots, recommandation, analyse de données et modèles de Machine Learning.
               </p>
-              <p style="font-size:0.9rem; color:#cbd5f5;">
-                Mon parcours m'a permis d'acquérir une solide base technique sur toute la chaîne de valeur de la donnée,
-                des technologies Big Data (Hadoop, Spark) aux outils de visualisation (Power BI, Tableau).
+              <p style="font-size:0.9rem; color:#cbd5f5;"
+                 data-fr="Mon profil couvre toute la chaîne de la donnée, de l'ingénierie et du traitement jusqu'à la modélisation, la visualisation et l'intégration d'outils d'IA générative."
+                 data-en="My profile covers the data lifecycle, from engineering and processing to modeling, visualization and integration of Generative AI tools.">
+                Mon profil couvre toute la chaîne de la donnée, de l'ingénierie et du traitement jusqu'à la modélisation, la visualisation et l'intégration d'outils d'IA générative.
               </p>
               <div class="tags">
-                <span class="tag tag-strong">Data Science & AI</span>
-                <span class="tag">Big Data (Hadoop, Spark, Kafka)</span>
-                <span class="tag">Deep Learning (CNN, LSTM, Transformers)</span>
-                <span class="tag">Python & R</span>
+                <span class="tag tag-strong">Generative AI</span>
+                <span class="tag">NLP & LLMs</span>
+                <span class="tag">Data Engineering</span>
+                <span class="tag">Big Data</span>
               </div>
             </div>
           </div>
 
           <div class="reveal">
             <div class="card">
-              <div class="skill-group-title">Langues</div>
+              <div class="skill-group-title" data-fr="Langues" data-en="Languages">Langues</div>
               <div class="list-chips" style="margin-bottom:1.3rem;">
-                <div class="list-chip"><strong>Arabe</strong> · Langue Maternelle</div>
-                <div class="list-chip"><strong>Français</strong> · Courant</div>
-                <div class="list-chip"><strong>Anglais</strong> · Courant</div>
-                <div class="list-chip"><strong>Turc</strong> · Notions de base</div>
+                <div class="list-chip"><strong>Arabe</strong> · <span data-fr="Langue maternelle" data-en="Native">Langue maternelle</span></div>
+                <div class="list-chip"><strong>Français</strong> · <span data-fr="Courant" data-en="Fluent">Courant</span></div>
+                <div class="list-chip"><strong>Anglais</strong> · <span data-fr="Courant" data-en="Fluent">Courant</span></div>
+                <div class="list-chip"><strong>Turc</strong> · <span data-fr="Notions de base" data-en="Basic">Notions de base</span></div>
               </div>
 
-              <div class="skill-group-title">Mon focus actuel</div>
-              <p style="font-size:0.85rem; color:#cbd5f5;">
-                • Stage de Fin d'Études (PFE) en IA/Data Science<br>
-                • Application de modèles de Deep Learning avancés (e.g., Transformers)<br>
-                • Maîtrise des écosystèmes Big Data pour des solutions scalables<br>
-                • Contribution à des projets innovants dans des domaines comme l'IoT
+              <div class="skill-group-title" data-fr="Focus actuel" data-en="Current focus">Focus actuel</div>
+              <p style="font-size:0.85rem; color:#cbd5f5;"
+                 data-fr="• Master 2 DKAI à l'Université Paris-Saclay<br>• IA générative, LLMs & RAG<br>• Data Engineering & systèmes intelligents<br>• Recherche de stage / opportunités en IA & Data"
+                 data-en="• Master 2 DKAI at Université Paris-Saclay<br>• Generative AI, LLMs & RAG<br>• Data Engineering & intelligent systems<br>• Looking for internships / opportunities in AI & Data">
+                • Master 2 DKAI à l'Université Paris-Saclay<br>• IA générative, LLMs & RAG<br>• Data Engineering & systèmes intelligents<br>• Recherche de stage / opportunités en IA & Data
               </p>
               <div class="tags" style="margin-top:0.9rem;">
-                <span class="tag">PFE 2026</span>
-                <span class="tag">NLP & GPT-40</span>
-                <span class="tag">Analyse d'Anomalies</span>
-                <span class="tag">IoT Integration</span>
+                <span class="tag">M2 DKAI</span>
+                <span class="tag">LLMs</span>
+                <span class="tag">RAG</span>
+                <span class="tag">AI Engineering</span>
               </div>
             </div>
           </div>
@@ -1078,47 +1141,40 @@
       <div class="container">
         <div class="reveal">
           <h2 class="section-title">
-            Compétences Techniques
-            <span class="badge">Data, AI & Big Data</span>
+            <span data-fr="Compétences Techniques" data-en="Technical Skills">Compétences Techniques</span>
+            <span class="badge" data-fr="Data · AI · Big Data" data-en="Data · AI · Big Data">Data · AI · Big Data</span>
           </h2>
-          <p class="section-subtitle">
-            Un ensemble complet de compétences allant du développement logiciel à la gestion d'infrastructures Big Data
-            et à la modélisation d'Intelligence Artificielle.
+          <p class="section-subtitle"
+             data-fr="Compétences en développement, Intelligence Artificielle, LLMs, Data Engineering, Big Data et visualisation."
+             data-en="Skills across software development, Artificial Intelligence, LLMs, Data Engineering, Big Data and visualization.">
+            Compétences en développement, Intelligence Artificielle, LLMs, Data Engineering, Big Data et visualisation.
           </p>
         </div>
 
         <div class="grid grid-2">
           <div class="reveal">
             <div class="card">
-              <div class="skill-group-title">Data Science & Programmation</div>
+              <div class="skill-group-title" data-fr="Programmation & Data Science" data-en="Programming & Data Science">Programmation & Data Science</div>
               <div class="skills-grid">
                 <div>
-                  <div class="skill-item-title">Python, R & C</div>
-                  <div class="skill-meta">Développement, Scripting, Calcul Scientifique</div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-percent="90"></div>
-                  </div>
+                  <div class="skill-item-title">Python · R · C/C++ · JavaScript</div>
+                  <div class="skill-meta" data-fr="Développement, scripting, analyse et calcul scientifique" data-en="Development, scripting, analysis and scientific computing">Développement, scripting, analyse et calcul scientifique</div>
+                  <div class="skill-bar"><div class="skill-progress" data-percent="92"></div></div>
                 </div>
                 <div>
-                  <div class="skill-item-title">Machine Learning & DL</div>
-                  <div class="skill-meta">TensorFlow, Keras, Scikit-learn, CNN, LSTM</div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-percent="85"></div>
-                  </div>
+                  <div class="skill-item-title">Machine Learning & Deep Learning</div>
+                  <div class="skill-meta">Scikit-learn · TensorFlow · Keras · CNN · LSTM · Transformers</div>
+                  <div class="skill-bar"><div class="skill-progress" data-percent="88"></div></div>
                 </div>
                 <div>
-                  <div class="skill-item-title">Analyse & Visualisation</div>
-                  <div class="skill-meta">Pandas, NumPy, Matplotlib, Power BI, Tableau</div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-percent="88"></div>
-                  </div>
+                  <div class="skill-item-title">NLP & Generative AI</div>
+                  <div class="skill-meta">LLMs · RAG · LangChain · Transformers · GPT-4o · Ollama</div>
+                  <div class="skill-bar"><div class="skill-progress" data-percent="88"></div></div>
                 </div>
                 <div>
-                  <div class="skill-item-title">NLP & Web Scraping</div>
-                  <div class="skill-meta">BeautifulSoup, modèles NLP, GPT-40</div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-percent="75"></div>
-                  </div>
+                  <div class="skill-item-title">Data Analysis & Visualization</div>
+                  <div class="skill-meta">Pandas · NumPy · Plotly · Power BI · Tableau</div>
+                  <div class="skill-bar"><div class="skill-progress" data-percent="90"></div></div>
                 </div>
               </div>
             </div>
@@ -1126,290 +1182,36 @@
 
           <div class="reveal">
             <div class="card">
-              <div class="skill-group-title">Big Data & Bases de Données</div>
+              <div class="skill-group-title" data-fr="Data Engineering & Infrastructure" data-en="Data Engineering & Infrastructure">Data Engineering & Infrastructure</div>
               <div class="skills-grid">
                 <div>
-                  <div class="skill-item-title">Big Data Ecosystems</div>
-                  <div class="skill-meta">Hadoop (HDFS, YARN), Spark, Hive, Kafka, Airflow</div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-percent="80"></div>
-                  </div>
+                  <div class="skill-item-title">Big Data</div>
+                  <div class="skill-meta">Hadoop · Spark · Hive · Kafka · Airflow</div>
+                  <div class="skill-bar"><div class="skill-progress" data-percent="84"></div></div>
                 </div>
                 <div>
-                  <div class="skill-item-title">Bases de Données SQL & NoSQL</div>
-                  <div class="skill-meta">MySQL, PostgreSQL, Snowflake, MongoDB</div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-percent="78"></div>
-                  </div>
+                  <div class="skill-item-title">SQL & NoSQL</div>
+                  <div class="skill-meta">MySQL · PostgreSQL · Snowflake · MongoDB · Elasticsearch · Qdrant</div>
+                  <div class="skill-bar"><div class="skill-progress" data-percent="82"></div></div>
                 </div>
                 <div>
-                  <div class="skill-item-title">Outils de Design</div>
-                  <div class="skill-meta">Canva, Illustrator, Photoshop, Adobe Premiere Pro</div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-percent="70"></div>
-                  </div>
+                  <div class="skill-item-title">Document AI</div>
+                  <div class="skill-meta">PaddleOCR · pdfplumber · OCR pipelines · Invoice extraction</div>
+                  <div class="skill-bar"><div class="skill-progress" data-percent="84"></div></div>
+                </div>
+                <div>
+                  <div class="skill-item-title">Development & Version Control</div>
+                  <div class="skill-meta">Git · GitHub · HTML/CSS/JS · Streamlit · Gradio</div>
+                  <div class="skill-bar"><div class="skill-progress" data-percent="86"></div></div>
                 </div>
               </div>
               <div class="tags">
-                <span class="tag tag-strong">Hadoop/Spark</span>
-                <span class="tag">MongoDB & SQL</span>
-                <span class="tag">Matlab</span>
-                <span class="tag">GPT-40</span>
+                <span class="tag tag-strong">Python</span>
+                <span class="tag">LLMs</span>
+                <span class="tag">RAG</span>
+                <span class="tag">Spark</span>
+                <span class="tag">OCR</span>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="section">
-      <div class="container">
-        <div class="reveal">
-          <h2 class="section-title">
-            Projets & Réalisations
-            <span class="badge">Open Source & Académique</span>
-          </h2>
-          <p class="section-subtitle">
-            Une sélection de mes travaux en Intelligence Artificielle, Big Data et IoT, tous disponibles sur GitHub.
-          </p>
-        </div>
-
-        <div class="grid grid-2 grid-3">
-          <!-- Projet 1 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">DARIJAFLOW</div>
-                <div class="skill-item-title">Speech-to-Text & Translation</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Plateforme d'IA pour la transcription du Darija en temps réel avec traduction anglaise intégrée.
-                </p>
-                <div class="tags">
-                  <span class="tag">NLP</span>
-                  <span class="tag">Python</span>
-                  <span class="tag">AI</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/Darija-Speech-to-Text-with-Real-Time-English-Translation-An-AI-Powered-Web-Platform"
-                target="_blank" class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Projet 2 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">Cobot de Recommandation</div>
-                <div class="skill-item-title">Microsoft Learn Assistant</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Assistant intelligent recommandant des formations Microsoft Learn via scraping et NLP.
-                </p>
-                <div class="tags">
-                  <span class="tag">GPT-4o</span>
-                  <span class="tag">Scraping</span>
-                  <span class="tag">NLP</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/Cobot-Intelligent-de-Recommandation-et-analyse-de-Formations-Microsoft-Learn"
-                target="_blank" class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Projet 3 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">Stage OCP</div>
-                <div class="skill-item-title">Surveillance IoT & IA</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Application de surveillance en temps réel utilisant l'IoT et l'IA pour la maintenance prédictive.
-                </p>
-                <div class="tags">
-                  <span class="tag">IoT</span>
-                  <span class="tag">IA</span>
-                  <span class="tag">Python</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/Stage-OCP-Surveillance-des-v-hicules-alerte-et-s-curit-"
-                target="_blank" class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Projet 4 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">VizStream</div>
-                <div class="skill-item-title">Streaming Guide & Viz</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Guide ultime du streaming et de la visualisation de données via Web Scraping et Streamlit.
-                </p>
-                <div class="tags">
-                  <span class="tag">Python</span>
-                  <span class="tag">Streamlit</span>
-                  <span class="tag">Web Scraping</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/VizStream" target="_blank" class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Projet 5 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">Prediction Boursière</div>
-                <div class="skill-item-title">CNN & LSTM Hybrid</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Prédiction de l'indice Nifty 50 en utilisant des modèles hybrides CNN et LSTM.
-                </p>
-                <div class="tags">
-                  <span class="tag">Deep Learning</span>
-                  <span class="tag">LSTM</span>
-                  <span class="tag">Python</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/stock-marcket-prediction-CNN-from-scratch-LSTM-" target="_blank"
-                class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Projet 6 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">Somnolence Conducteur</div>
-                <div class="skill-item-title">Driver Safety AI</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Système basé sur l'IA pour la détection en temps réel de la somnolence du conducteur.
-                </p>
-                <div class="tags">
-                  <span class="tag">Computer Vision</span>
-                  <span class="tag">OpenCV</span>
-                  <span class="tag">Python</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/d-tection-de-somnolence-du-conducteur" target="_blank"
-                class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Projet 7 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">LED Hand Control</div>
-                <div class="skill-item-title">Gesture Recognition IoT</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Contrôle intelligent des lampes par gestes de la main via vision par ordinateur et Arduino.
-                </p>
-                <div class="tags">
-                  <span class="tag">Arduino</span>
-                  <span class="tag">OpenCV</span>
-                  <span class="tag">Python</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/Led-Hand-Control" target="_blank" class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Projet 8 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">Sentiment Analysis</div>
-                <div class="skill-item-title">IMDb Review Prediction</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Scraping et analyse sentimentale des critiques IMDb pour prédire le succès des films.
-                </p>
-                <div class="tags">
-                  <span class="tag">NLP</span>
-                  <span class="tag">Scraping</span>
-                  <span class="tag">Python</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/Web-Scraping-et-Analyse-Sentimentale-des-Critiques-IMDb-pour-la-Pr-diction-des-Films-Top-10"
-                target="_blank" class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Projet 9 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">Business Intelligence</div>
-                <div class="skill-item-title">Retail Sales Analysis</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Solution BI pour l'analyse et la gestion des ventes des supermarchés.
-                </p>
-                <div class="tags">
-                  <span class="tag">Power BI</span>
-                  <span class="tag">SQL</span>
-                  <span class="tag">Data Viz</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/Analyse-et-la-Gestion-des-Ventes-des-Supermarch-s-BI" target="_blank"
-                class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Projet 10 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">Emotion Detection</div>
-                <div class="skill-item-title">Facial Expressions AI</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Système de détection et classification des émotions faciales via Deep Learning (CNN).
-                </p>
-                <div class="tags">
-                  <span class="tag">CNN</span>
-                  <span class="tag">TensorFlow</span>
-                  <span class="tag">Keras</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/facial-emotions-detection" target="_blank" class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Projet 11 -->
-          <div class="reveal">
-            <div class="card project-card">
-              <div>
-                <div class="skill-group-title">Life Expectancy</div>
-                <div class="skill-item-title">Machine Learning Model</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">
-                  Analyse et prédiction des facteurs d'espérance de vie mondiale (R² = 0.949).
-                </p>
-                <div class="tags">
-                  <span class="tag">ML</span>
-                  <span class="tag">Regression</span>
-                  <span class="tag">Python</span>
-                </div>
-              </div>
-              <a href="https://github.com/HibvKh/Life_Expectancy-machine-learning" target="_blank" class="project-link">
-                Voir sur GitHub <span>↗</span>
-              </a>
             </div>
           </div>
         </div>
@@ -1420,62 +1222,290 @@
       <div class="container">
         <div class="reveal">
           <h2 class="section-title">
-            Expériences
-            <span class="badge">Professionnelles</span>
+            <span data-fr="Expériences Professionnelles" data-en="Professional Experience">Expériences Professionnelles</span>
+            <span class="badge" data-fr="Stages & PFE" data-en="Internships & Graduation Project">Stages & PFE</span>
           </h2>
-          <p class="section-subtitle">
-            Application des compétences en IA et Big Data au travers de stages centrés sur la recommandation
-            intelligente et la maintenance prédictive.
+          <p class="section-subtitle"
+             data-fr="Expériences en IA, Data Science, NLP, OCR et systèmes intelligents."
+             data-en="Experience in AI, Data Science, NLP, OCR and intelligent systems.">
+            Expériences en IA, Data Science, NLP, OCR et systèmes intelligents.
           </p>
         </div>
 
         <div class="reveal">
           <div class="card">
             <div class="timeline">
+
               <div class="timeline-item">
-                <div class="timeline-item-title">PFA Internship: Development of a Training Recommendation Cobot</div>
-                <div class="timeline-item-meta">
-                  DynIT RABAT · Jul 2025 – Sep 2025
+                <div class="timeline-item-title"
+                     data-fr="Stage de Fin d'Études (PFE) — Portail Financier Tanger Alliance"
+                     data-en="Graduation Internship — Tanger Alliance Financial Portal">
+                  Stage de Fin d'Études (PFE) — Portail Financier Tanger Alliance
                 </div>
+                <div class="timeline-item-meta">Tanger Alliance, Tanger · <strong>Déc. 2025 – Mars 2026</strong></div>
                 <div class="timeline-item-body">
                   <ul>
-                    <li>Développement d'un cobot de recommandation intelligent pour Microsoft Learn, combinant Data
-                      Science et IA.</li>
-                    <li>Intégration de NLP, de Machine Learning et du modèle GPT-40.</li>
-                    <li>Création d'une interface web interactive (HTML, CSS, JavaScript) pour des recommandations
-                      personnalisées.</li>
+                    <li data-fr="Développement d'une plateforme financière intelligente basée sur l'IA pour l'extraction et l'analyse automatisées des factures."
+                        data-en="Developed an AI-powered financial platform for automated invoice extraction and analysis.">
+                      Développement d'une plateforme financière intelligente basée sur l'IA pour l'extraction et l'analyse automatisées des factures.
+                    </li>
+                    <li data-fr="Mise en place d'un pipeline de traitement documentaire avec PaddleOCR et pdfplumber."
+                        data-en="Built a document-processing pipeline using PaddleOCR and pdfplumber.">
+                      Mise en place d'un pipeline de traitement documentaire avec PaddleOCR et pdfplumber.
+                    </li>
+                    <li data-fr="Intégration de modèles de langage et d'outils de recherche/interaction pour développer des chatbots dédiés aux budgets et aux revenus."
+                        data-en="Integrated language models and retrieval/interaction tools to build chatbots dedicated to budgets and revenues.">
+                      Intégration de modèles de langage et d'outils de recherche/interaction pour développer des chatbots dédiés aux budgets et aux revenus.
+                    </li>
+                    <li data-fr="Travail sur l'adaptation de modèles Qwen avec LoRA/QLoRA et l'utilisation de MCP pour l'intégration des outils."
+                        data-en="Worked on Qwen model adaptation with LoRA/QLoRA and used MCP for tool integration.">
+                      Travail sur l'adaptation de modèles Qwen avec LoRA/QLoRA et l'utilisation de MCP pour l'intégration des outils.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-item-title"
+                     data-fr="Stage — Développement d'un Cobot de Recommandation"
+                     data-en="Internship — Training Recommendation Cobot">
+                  Stage — Développement d'un Cobot de Recommandation
+                </div>
+                <div class="timeline-item-meta">DynIT, Rabat · <strong>Juin – Août 2025</strong></div>
+                <div class="timeline-item-body">
+                  <ul>
+                    <li data-fr="Développement d'un cobot de recommandation pour Microsoft Learn basé sur le NLP, le Machine Learning et GPT-4o."
+                        data-en="Developed a Microsoft Learn recommendation cobot using NLP, Machine Learning and GPT-4o.">
+                      Développement d'un cobot de recommandation pour Microsoft Learn basé sur le NLP, le Machine Learning et GPT-4o.
+                    </li>
+                    <li data-fr="Exploitation du Microsoft Learn Catalog API pour collecter et structurer les données de formation."
+                        data-en="Used the Microsoft Learn Catalog API to collect and structure training data.">
+                      Exploitation du Microsoft Learn Catalog API pour collecter et structurer les données de formation.
+                    </li>
+                    <li data-fr="Création d'une interface web interactive pour les recommandations personnalisées."
+                        data-en="Built an interactive web interface for personalized recommendations.">
+                      Création d'une interface web interactive pour les recommandations personnalisées.
+                    </li>
                   </ul>
                   <a href="https://github.com/HibvKh/Cobot-Intelligent-de-Recommandation-et-analyse-de-Formations-Microsoft-Learn"
-                    target="_blank" class="project-link" style="margin-top:0.5rem;">
-                    Code source GitHub <span>↗</span>
+                     target="_blank" class="project-link">
+                    <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
                   </a>
                 </div>
               </div>
+
               <div class="timeline-item">
-                <div class="timeline-item-title">Internship: Anomaly Detection and Failure Prediction</div>
-                <div class="timeline-item-meta">
-                  OCP Khouribga Sidi Chennane · August 2024
+                <div class="timeline-item-title"
+                     data-fr="Stage d'Observation — Détection d'Anomalies & Prédiction de Pannes"
+                     data-en="Observation Internship — Anomaly Detection & Failure Prediction">
+                  Stage d'Observation — Détection d'Anomalies & Prédiction de Pannes
                 </div>
+                <div class="timeline-item-meta">OCP Group, Sidi Chennane, Khouribga · <strong>Août 2024</strong></div>
                 <div class="timeline-item-body">
                   <ul>
-                    <li>Création d'une application d'IA pour la détection d'anomalies et la prédiction de pannes.</li>
-                    <li>Application des modèles Autoencoder, LSTM et CNN.</li>
-                    <li>Contribution au suivi en temps réel de plus de 50 véhicules.</li>
+                    <li data-fr="Développement d'une application de surveillance en temps réel d'une flotte de véhicules."
+                        data-en="Developed a real-time monitoring application for a vehicle fleet.">
+                      Développement d'une application de surveillance en temps réel d'une flotte de véhicules.
+                    </li>
+                    <li data-fr="Conception d'une solution de détection d'anomalies et de prédiction de pannes avec Autoencoder, LSTM et CNN."
+                        data-en="Designed an anomaly detection and failure prediction solution using Autoencoder, LSTM and CNN models.">
+                      Conception d'une solution de détection d'anomalies et de prédiction de pannes avec Autoencoder, LSTM et CNN.
+                    </li>
+                    <li data-fr="Suivi de données telles que pression/température des pneus, carburant, charge, GPS et kilométrage."
+                        data-en="Monitored data such as tire pressure/temperature, fuel, load, GPS and mileage.">
+                      Suivi de données telles que pression/température des pneus, carburant, charge, GPS et kilométrage.
+                    </li>
                   </ul>
                   <a href="https://github.com/HibvKh/Stage-OCP-Surveillance-des-v-hicules-alerte-et-s-curit-"
-                    target="_blank" class="project-link" style="margin-top:0.5rem;">
-                    Code source GitHub <span>↗</span>
+                     target="_blank" class="project-link">
+                    <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
                   </a>
                 </div>
               </div>
+
             </div>
+
             <div class="tags" style="margin-top:1rem;">
-              <span class="tag tag-strong">Stage PFA</span>
-              <span class="tag">Maintenance Prédictive</span>
-              <span class="tag">NLP & GPT-40</span>
+              <span class="tag tag-strong">AI Engineering</span>
+              <span class="tag">LLMs</span>
+              <span class="tag">OCR</span>
+              <span class="tag">NLP</span>
               <span class="tag">Data Science</span>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">
+            <span data-fr="Projets & Réalisations" data-en="Projects & Work">Projets & Réalisations</span>
+            <span class="badge" data-fr="Sélection" data-en="Selected">Sélection</span>
+          </h2>
+          <p class="section-subtitle"
+             data-fr="Une sélection de projets en IA, NLP, Big Data, Computer Vision et Business Intelligence."
+             data-en="A selection of projects in AI, NLP, Big Data, Computer Vision and Business Intelligence.">
+            Une sélection de projets en IA, NLP, Big Data, Computer Vision et Business Intelligence.
+          </p>
+        </div>
+
+        <div class="grid grid-2 grid-3">
+
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">DARIJAFLOW</div>
+                <div class="skill-item-title" data-fr="Speech-to-Text & Traduction" data-en="Speech-to-Text & Translation">Speech-to-Text & Traduction</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;"
+                   data-fr="Plateforme d'IA pour la transcription du Darija en temps réel avec traduction anglaise intégrée."
+                   data-en="AI platform for real-time Darija transcription with integrated English translation.">
+                  Plateforme d'IA pour la transcription du Darija en temps réel avec traduction anglaise intégrée.
+                </p>
+              </div>
+              <a href="https://github.com/HibvKh/Darija-Speech-to-Text-with-Real-Time-English-Translation-An-AI-Powered-Web-Platform" target="_blank" class="project-link">
+                <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title" data-fr="Cobot de Recommandation" data-en="Recommendation Cobot">Cobot de Recommandation</div>
+                <div class="skill-item-title">Microsoft Learn Assistant</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;"
+                   data-fr="Assistant intelligent recommandant des formations Microsoft Learn via API, NLP et GPT-4o."
+                   data-en="Intelligent assistant recommending Microsoft Learn training through APIs, NLP and GPT-4o.">
+                  Assistant intelligent recommandant des formations Microsoft Learn via API, NLP et GPT-4o.
+                </p>
+              </div>
+              <a href="https://github.com/HibvKh/Cobot-Intelligent-de-Recommandation-et-analyse-de-Formations-Microsoft-Learn" target="_blank" class="project-link">
+                <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title" data-fr="Surveillance IoT & IA" data-en="IoT Monitoring & AI">Surveillance IoT & IA</div>
+                <div class="skill-item-title">OCP Vehicle Monitoring</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;"
+                   data-fr="Surveillance temps réel et maintenance prédictive pour une flotte de véhicules."
+                   data-en="Real-time monitoring and predictive maintenance for a vehicle fleet.">
+                  Surveillance temps réel et maintenance prédictive pour une flotte de véhicules.
+                </p>
+              </div>
+              <a href="https://github.com/HibvKh/Stage-OCP-Surveillance-des-v-hicules-alerte-et-s-curit-" target="_blank" class="project-link">
+                <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">VizStream</div>
+                <div class="skill-item-title">Streaming Guide & Viz</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;"
+                   data-fr="Guide du streaming et visualisation de données via Web Scraping et Streamlit."
+                   data-en="Streaming guide and data visualization using Web Scraping and Streamlit.">
+                  Guide du streaming et visualisation de données via Web Scraping et Streamlit.
+                </p>
+              </div>
+              <a href="https://github.com/HibvKh/VizStream" target="_blank" class="project-link">
+                <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title" data-fr="Prédiction Boursière" data-en="Stock Market Prediction">Prédiction Boursière</div>
+                <div class="skill-item-title">CNN & LSTM Hybrid</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;"
+                   data-fr="Prédiction de l'indice Nifty 50 avec des modèles hybrides CNN et LSTM."
+                   data-en="Nifty 50 index prediction using hybrid CNN and LSTM models.">
+                  Prédiction de l'indice Nifty 50 avec des modèles hybrides CNN et LSTM.
+                </p>
+              </div>
+              <a href="https://github.com/HibvKh/stock-marcket-prediction-CNN-from-scratch-LSTM-" target="_blank" class="project-link">
+                <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title" data-fr="Détection de Somnolence" data-en="Driver Drowsiness Detection">Détection de Somnolence</div>
+                <div class="skill-item-title">Driver Safety AI</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;"
+                   data-fr="Système de Computer Vision pour la détection en temps réel de la somnolence du conducteur."
+                   data-en="Computer Vision system for real-time driver drowsiness detection.">
+                  Système de Computer Vision pour la détection en temps réel de la somnolence du conducteur.
+                </p>
+              </div>
+              <a href="https://github.com/HibvKh/d-tection-de-somnolence-du-conducteur" target="_blank" class="project-link">
+                <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Emotion Detection</div>
+                <div class="skill-item-title" data-fr="Expressions Faciales AI" data-en="Facial Expression AI">Expressions Faciales AI</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;"
+                   data-fr="Classification des émotions faciales avec Deep Learning et CNN."
+                   data-en="Facial emotion classification using Deep Learning and CNNs.">
+                  Classification des émotions faciales avec Deep Learning et CNN.
+                </p>
+              </div>
+              <a href="https://github.com/HibvKh/facial-emotions-detection" target="_blank" class="project-link">
+                <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Business Intelligence</div>
+                <div class="skill-item-title" data-fr="Analyse des ventes retail" data-en="Retail Sales Analysis">Analyse des ventes retail</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;"
+                   data-fr="Solution BI pour l'analyse et la gestion des ventes de supermarchés."
+                   data-en="BI solution for supermarket sales analysis and management.">
+                  Solution BI pour l'analyse et la gestion des ventes de supermarchés.
+                </p>
+              </div>
+              <a href="https://github.com/HibvKh/Analyse-et-la-Gestion-des-Ventes-des-Supermarch-s-BI" target="_blank" class="project-link">
+                <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="card project-card">
+              <div>
+                <div class="skill-group-title">Life Expectancy</div>
+                <div class="skill-item-title" data-fr="Modèle de Machine Learning" data-en="Machine Learning Model">Modèle de Machine Learning</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;"
+                   data-fr="Analyse et prédiction des facteurs d'espérance de vie mondiale (R² = 0.949)."
+                   data-en="Analysis and prediction of global life expectancy factors (R² = 0.949).">
+                  Analyse et prédiction des facteurs d'espérance de vie mondiale (R² = 0.949).
+                </p>
+              </div>
+              <a href="https://github.com/HibvKh/Life_Expectancy-machine-learning" target="_blank" class="project-link">
+                <span data-fr="Voir sur GitHub" data-en="View on GitHub">Voir sur GitHub</span> <span>↗</span>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -1484,74 +1514,75 @@
       <div class="container">
         <div class="reveal">
           <h2 class="section-title">
-            Mon Expertise
-            <span class="badge">Ce que j'apporte</span>
+            <span data-fr="Mon Expertise" data-en="Expertise">Mon Expertise</span>
+            <span class="badge" data-fr="Ce que j'apporte" data-en="What I bring">Ce que j'apporte</span>
           </h2>
-          <p class="section-subtitle">
-            Grâce à ma formation en Big Data et IA, je suis capable de couvrir l'ensemble du cycle de vie des projets
-            Data, de la collecte à la mise en production des modèles.
+          <p class="section-subtitle"
+             data-fr="De l'ingénierie des données à l'IA générative, je peux intervenir sur plusieurs étapes d'un projet Data."
+             data-en="From data engineering to Generative AI, I can contribute across several stages of a Data project.">
+            De l'ingénierie des données à l'IA générative, je peux intervenir sur plusieurs étapes d'un projet Data.
           </p>
         </div>
 
         <div class="services-grid">
           <div class="service-card reveal">
             <div class="service-icon">🧠</div>
-            <div class="service-title">Développement de Modèles AI</div>
-            <div class="service-body">
-              Conception et entraînement de modèles de Deep Learning (CNN, LSTM, Transformers) pour la classification,
-              la prédiction de séries temporelles ou le traitement du langage naturel.
+            <div class="service-title" data-fr="IA Générative & LLMs" data-en="Generative AI & LLMs">IA Générative & LLMs</div>
+            <div class="service-body" data-fr="Intégration de LLMs, RAG, agents/outils et chatbots pour construire des assistants spécialisés."
+                 data-en="Integration of LLMs, RAG, agents/tools and chatbots to build specialized assistants.">
+              Intégration de LLMs, RAG, agents/outils et chatbots pour construire des assistants spécialisés.
             </div>
-            <span class="service-chip">Deep Learning</span>
+            <span class="service-chip">LLMs · RAG</span>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-icon">📄</div>
+            <div class="service-title" data-fr="Document AI & OCR" data-en="Document AI & OCR">Document AI & OCR</div>
+            <div class="service-body" data-fr="Extraction, structuration et analyse automatisées de documents et de factures."
+                 data-en="Automated extraction, structuring and analysis of documents and invoices.">
+              Extraction, structuration et analyse automatisées de documents et de factures.
+            </div>
+            <span class="service-chip">PaddleOCR · pdfplumber</span>
           </div>
 
           <div class="service-card reveal">
             <div class="service-icon">📊</div>
-            <div class="service-title">Analyse et Visualisation de Données</div>
-            <div class="service-body">
-              Nettoyage, analyse exploratoire (EDA) et création de tableaux de bord interactifs (Power BI, Tableau) pour
-              transformer les données brutes en informations exploitables.
+            <div class="service-title" data-fr="Data Science & Visualisation" data-en="Data Science & Visualization">Data Science & Visualisation</div>
+            <div class="service-body" data-fr="Analyse exploratoire, Machine Learning et création de dashboards avec Power BI, Tableau et Plotly."
+                 data-en="Exploratory analysis, Machine Learning and dashboard creation with Power BI, Tableau and Plotly.">
+              Analyse exploratoire, Machine Learning et création de dashboards avec Power BI, Tableau et Plotly.
             </div>
-            <span class="service-chip">Power BI · Tableau</span>
+            <span class="service-chip">Python · Power BI</span>
           </div>
 
           <div class="service-card reveal">
             <div class="service-icon">⛓️</div>
-            <div class="service-title">Big Data Pipeline Design</div>
-            <div class="service-body">
-              Mise en place d'architectures de traitement de données volumineuses et distribuées avec l'écosystème
-              Hadoop, Spark pour le calcul et Kafka pour le streaming.
+            <div class="service-title" data-fr="Data Engineering & Big Data" data-en="Data Engineering & Big Data">Data Engineering & Big Data</div>
+            <div class="service-body" data-fr="Conception de pipelines et traitement de données avec Spark, Hadoop, Kafka, Hive et Airflow."
+                 data-en="Pipeline design and data processing with Spark, Hadoop, Kafka, Hive and Airflow.">
+              Conception de pipelines et traitement de données avec Spark, Hadoop, Kafka, Hive et Airflow.
             </div>
-            <span class="service-chip">Hadoop · Spark · Kafka</span>
+            <span class="service-chip">Spark · Kafka</span>
           </div>
 
           <div class="service-card reveal">
             <div class="service-icon">💻</div>
-            <div class="service-title">Projets Python End-to-End</div>
-            <div class="service-body">
-              Développement d'applications complètes basées sur Python, intégrant des bases de données (SQL/NoSQL) et
-              des solutions de web scraping.
+            <div class="service-title" data-fr="Développement Python End-to-End" data-en="End-to-End Python Development">Développement Python End-to-End</div>
+            <div class="service-body" data-fr="Applications complètes intégrant API, bases SQL/NoSQL, scraping et interfaces web."
+                 data-en="End-to-end applications integrating APIs, SQL/NoSQL databases, scraping and web interfaces.">
+              Applications complètes intégrant API, bases SQL/NoSQL, scraping et interfaces web.
             </div>
-            <span class="service-chip">Python · SQL · MongoDB</span>
+            <span class="service-chip">Python · SQL</span>
           </div>
 
           <div class="service-card reveal">
-            <div class="service-icon">🌐</div>
-            <div class="service-title">IoT et Systèmes Connectés</div>
-            <div class="service-body">
-              Conception de systèmes intelligents (comme le contrôle par geste) intégrant des capteurs, des
-              microcontrôleurs (Arduino/Raspberry Pi) et des applications logicielles.
+            <div class="service-icon">🔎</div>
+            <div class="service-title" data-fr="Recherche & Prototypage IA" data-en="AI Research & Prototyping">Recherche & Prototypage IA</div>
+            <div class="service-body" data-fr="Exploration de modèles, évaluation, fine-tuning et prototypage rapide de solutions IA."
+                 data-en="Model exploration, evaluation, fine-tuning and rapid prototyping of AI solutions.">
+              Exploration de modèles, évaluation, fine-tuning et prototypage rapide de solutions IA.
             </div>
-            <span class="service-chip">Arduino · OpenCV · IoT</span>
-          </div>
-
-          <div class="service-card reveal">
-            <div class="service-icon">📚</div>
-            <div class="service-title">Mentorat & Formation Technique</div>
-            <div class="service-body">
-              Partage de connaissances sur des sujets comme Excel, SQL, Python ou Power BI pour aider les équipes non
-              techniques à monter en compétence sur la culture Data.
-            </div>
-            <span class="service-chip">Formation</span>
+            <span class="service-chip">LoRA · QLoRA</span>
           </div>
         </div>
       </div>
@@ -1561,39 +1592,35 @@
       <div class="container">
         <div class="reveal">
           <h2 class="section-title">
-            Certifications
-            <span class="badge">Compétences Digitales</span>
+            <span data-fr="Certifications" data-en="Certifications">Certifications</span>
+            <span class="badge" data-fr="Compétences digitales" data-en="Digital Skills">Compétences digitales</span>
           </h2>
-          <p class="section-subtitle">
-            Certifications formelles complétant ma formation académique et validant des compétences pratiques
-            essentielles dans l'ère numérique.
-          </p>
         </div>
-
         <div class="reveal">
           <div class="card">
             <div class="timeline">
               <div class="timeline-item">
                 <div class="timeline-item-title">Professional Development Skills for The Digital Age</div>
                 <div class="timeline-item-meta">ALX</div>
-                <div class="timeline-item-body">
-                  Développement de compétences professionnelles essentielles pour réussir dans l'environnement de
-                  travail numérique actuel.
+                <div class="timeline-item-body" data-fr="Développement de compétences professionnelles pour l'environnement de travail numérique."
+                     data-en="Professional skills development for the modern digital workplace.">
+                  Développement de compétences professionnelles pour l'environnement de travail numérique.
                 </div>
               </div>
               <div class="timeline-item">
                 <div class="timeline-item-title">Excel Beginner to Pro / Power BI</div>
                 <div class="timeline-item-meta">Udemy</div>
-                <div class="timeline-item-body">
-                  Maîtrise complète d'Excel et de Power BI pour l'analyse et la visualisation de données.
+                <div class="timeline-item-body" data-fr="Excel et Power BI pour l'analyse et la visualisation de données."
+                     data-en="Excel and Power BI for data analysis and visualization.">
+                  Excel et Power BI pour l'analyse et la visualisation de données.
                 </div>
               </div>
               <div class="timeline-item">
                 <div class="timeline-item-title">SQL / Python</div>
                 <div class="timeline-item-meta">Udemy</div>
-                <div class="timeline-item-body">
-                  Compétences en gestion de bases de données relationnelles (SQL) et en programmation fondamentale pour
-                  la Data Science (Python).
+                <div class="timeline-item-body" data-fr="Bases de données relationnelles et programmation Python appliquée à la Data Science."
+                     data-en="Relational databases and Python programming applied to Data Science.">
+                  Bases de données relationnelles et programmation Python appliquée à la Data Science.
                 </div>
               </div>
             </div>
@@ -1611,46 +1638,60 @@
       <div class="container">
         <div class="reveal">
           <h2 class="section-title">
-            Formation Académique
-            <span class="badge">Parcours Ingénierie</span>
+            <span data-fr="Formation Académique" data-en="Education">Formation Académique</span>
+            <span class="badge" data-fr="Parcours" data-en="Academic Path">Parcours</span>
           </h2>
-          <p class="section-subtitle">
-            Un cursus solide orienté vers l'ingénierie, la science des données, et l'Intelligence Artificielle.
+          <p class="section-subtitle"
+             data-fr="Formation en ingénierie Big Data & IA suivie d'un Master 2 spécialisé en Data, Knowledge and Hybrid AI."
+             data-en="Big Data & AI engineering background followed by a specialized Master 2 in Data, Knowledge and Hybrid AI.">
+            Formation en ingénierie Big Data & IA suivie d'un Master 2 spécialisé en Data, Knowledge and Hybrid AI.
           </p>
         </div>
 
         <div class="reveal">
           <div class="card">
             <div class="timeline">
+
               <div class="timeline-item">
-                <div class="timeline-item-title">Cycle d'Ingénieur: Big Data et Intelligence Artificielle</div>
-                <div class="timeline-item-meta">
-                  École Nationale des Sciences Appliquées (ENSA) – Tétouan · 2023 – Présent
-                </div>
-                <div class="timeline-item-body">
-                  1ère, 2ème et 3ème année du cycle d'ingénierie, avec spécialisation en Big Data et IA.
+                <div class="timeline-item-title">Master 2 — Data, Knowledge and Hybrid Artificial Intelligence (DKAI)</div>
+                <div class="timeline-item-meta">Université Paris-Saclay · Orsay, France · <strong>2026 – 2027</strong></div>
+                <div class="timeline-item-body"
+                     data-fr="Master 2 orienté Data, connaissances et Intelligence Artificielle hybride."
+                     data-en="Master 2 focused on Data, Knowledge and Hybrid Artificial Intelligence.">
+                  Master 2 orienté Data, connaissances et Intelligence Artificielle hybride.
                 </div>
               </div>
 
               <div class="timeline-item">
-                <div class="timeline-item-title">Cycle Préparatoire (2 ans)</div>
-                <div class="timeline-item-meta">
-                  École Nationale des Sciences Appliquées (ENSA) – Tétouan · 2021 – 2023
-                </div>
-                <div class="timeline-item-body">
-                  Classes préparatoires intensives en mathématiques, physique et informatique.
+                <div class="timeline-item-title">Diplôme d'Ingénieur d'État — Big Data & Intelligence Artificielle</div>
+                <div class="timeline-item-meta">École Nationale des Sciences Appliquées (ENSA) · Tétouan, Maroc · <strong>2023 – 2026</strong></div>
+                <div class="timeline-item-body"
+                     data-fr="Cycle d'ingénieur spécialisé en Big Data, Intelligence Artificielle, Data Science et technologies distribuées."
+                     data-en="Engineering degree specialized in Big Data, Artificial Intelligence, Data Science and distributed technologies.">
+                  Cycle d'ingénieur spécialisé en Big Data, Intelligence Artificielle, Data Science et technologies distribuées.
                 </div>
               </div>
 
               <div class="timeline-item">
-                <div class="timeline-item-title">Baccalauréat (BAC) Sciences Physiques, Option Français</div>
-                <div class="timeline-item-meta">
-                  Lycée Ibn Abdoun – Khouribga · 2020 – 2021
-                </div>
-                <div class="timeline-item-body">
-                  Diplôme obtenu avec la mention Très Bien.
+                <div class="timeline-item-title">Cycle Préparatoire</div>
+                <div class="timeline-item-meta">ENSA · Tétouan · <strong>2021 – 2023</strong></div>
+                <div class="timeline-item-body"
+                     data-fr="Classes préparatoires en mathématiques, physique et informatique."
+                     data-en="Preparatory classes in mathematics, physics and computer science.">
+                  Classes préparatoires en mathématiques, physique et informatique.
                 </div>
               </div>
+
+              <div class="timeline-item">
+                <div class="timeline-item-title">Baccalauréat — Sciences Physiques, Option Français</div>
+                <div class="timeline-item-meta">Lycée Ibn Abdoun · Khouribga · <strong>2020 – 2021</strong></div>
+                <div class="timeline-item-body"
+                     data-fr="Mention Très Bien."
+                     data-en="Highest honors / Très Bien.">
+                  Mention Très Bien.
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -1661,44 +1702,39 @@
       <div class="container">
         <div class="reveal">
           <h2 class="section-title">
-            Vie Associative et Loisirs
-            <span class="badge">Engagement & Hobbies</span>
+            <span data-fr="Vie Associative & Loisirs" data-en="Activities & Interests">Vie Associative & Loisirs</span>
+            <span class="badge" data-fr="Engagement" data-en="Engagement">Engagement</span>
           </h2>
-          <p class="section-subtitle">
-            Mon engagement associatif et mes loisirs démontrent mon esprit d'équipe, mon organisation et ma passion pour
-            le sport.
-          </p>
         </div>
 
         <div class="reveal">
           <div class="card">
             <div class="timeline">
               <div class="timeline-item">
-                <div class="timeline-item-title">Responsabilités Associatives</div>
-                <div class="timeline-item-meta">Press EnsaTe IT & Media Manager, Ensate Press HR Manager</div>
-                <div class="timeline-item-body">
-                  Gestion de l'informatique et des médias pour les associations étudiantes et le club sportif (Sports
-                  Club IT & Media Manager).
+                <div class="timeline-item-title" data-fr="Responsabilités associatives" data-en="Student Association Roles">Responsabilités associatives</div>
+                <div class="timeline-item-meta">Press EnsaTe · IT & Media Manager · Ensate Press HR Manager · Sports Club IT & Media Manager</div>
+                <div class="timeline-item-body"
+                     data-fr="Participation à la gestion informatique, aux médias et aux activités associatives étudiantes."
+                     data-en="Involvement in IT, media and student association activities.">
+                  Participation à la gestion informatique, aux médias et aux activités associatives étudiantes.
                 </div>
               </div>
-
               <div class="timeline-item">
-                <div class="timeline-item-title">Loisirs Personnels</div>
-                <div class="timeline-item-meta">Sports et Créativité</div>
+                <div class="timeline-item-title" data-fr="Loisirs" data-en="Interests">Loisirs</div>
+                <div class="timeline-item-meta" data-fr="Sport & créativité" data-en="Sports & creativity">Sport & créativité</div>
                 <div class="timeline-item-body">
                   <ul>
-                    <li>Athlète de Gym et Bodybuilding, passionnée par la course de sprint.</li>
-                    <li>Pratique du Billard et de la Peinture (Paint).</li>
+                    <li data-fr="Gym, musculation et course de sprint" data-en="Gym, bodybuilding and sprint running">Gym, musculation et course de sprint</li>
+                    <li data-fr="Billard et peinture" data-en="Billiards and painting">Billard et peinture</li>
                   </ul>
                 </div>
               </div>
             </div>
-
             <div class="tags" style="margin-top:1rem;">
-              <span class="tag tag-strong">IT & Media Manager</span>
-              <span class="tag">HR Management</span>
-              <span class="tag">Sportive</span>
-              <span class="tag">Peinture</span>
+              <span class="tag tag-strong">IT & Media</span>
+              <span class="tag">HR</span>
+              <span class="tag">Sport</span>
+              <span class="tag">Painting</span>
             </div>
           </div>
         </div>
@@ -1709,43 +1745,43 @@
       <div class="container">
         <div class="reveal">
           <h2 class="section-title">
-            Contact
-            <span class="badge">Collaborons</span>
+            <span data-fr="Contact" data-en="Contact">Contact</span>
+            <span class="badge" data-fr="Collaborons" data-en="Let's connect">Collaborons</span>
           </h2>
-          <p class="section-subtitle">
-            Intéressé(e) par mon profil pour un PFE, un projet en IA/Big Data ou une collaboration académique ?
-            Contactez-moi !
+          <p class="section-subtitle"
+             data-fr="Intéressé(e) par mon profil pour un stage, un projet en IA/Big Data ou une collaboration académique ? Contactez-moi !"
+             data-en="Interested in my profile for an internship, an AI/Big Data project or an academic collaboration? Get in touch!">
+            Intéressé(e) par mon profil pour un stage, un projet en IA/Big Data ou une collaboration académique ? Contactez-moi !
           </p>
         </div>
 
         <div class="contact-grid">
           <div class="reveal">
             <div class="card contact-details">
-              <div class="skill-group-title">Détails de contact</div>
+              <div class="skill-group-title" data-fr="Détails de contact" data-en="Contact details">Détails de contact</div>
               <dl>
                 <dt>Email</dt>
                 <dd><a href="mailto:hibakharfasse8@gmail.com">hibakharfasse8@gmail.com</a></dd>
 
-                <dt>Téléphone</dt>
-                <dd><a href="tel:+212656289494">+212 656 289 494</a></dd>
+                <dt data-fr="Téléphone" data-en="Phone">Téléphone</dt>
+                <dd><a href="tel:+33743772393">+33 7 43 77 23 93</a></dd>
 
                 <dt>LinkedIn</dt>
-                <dd><a href="https://www.linkedin.com/in/kharfasse-hiba-344250316/"
-                    target="_blank">linkedin.com/in/kharfasse-hiba-344250316/</a></dd>
+                <dd><a href="https://www.linkedin.com/in/kharfasse-hiba-344250316/" target="_blank">linkedin.com/in/kharfasse-hiba-344250316/</a></dd>
 
                 <dt>GitHub</dt>
                 <dd><a href="https://github.com/HibvKh" target="_blank">github.com/HibvKh</a></dd>
 
-                <dt>Location</dt>
-                <dd>Tétouan, Maroc</dd>
+                <dt data-fr="Localisation" data-en="Location">Localisation</dt>
+                <dd data-fr="France · Université Paris-Saclay" data-en="France · Université Paris-Saclay">France · Université Paris-Saclay</dd>
               </dl>
 
               <div style="margin-top:1.1rem;">
-                <div class="skill-group-title">Sujets privilégiés</div>
-                <p class="contact-note">
-                  • Stage de Fin d'Études (PFE) en IA/Data Science<br>
-                  • Projets de Deep Learning et Big Data<br>
-                  • Collaborations universitaires et recherche
+                <div class="skill-group-title" data-fr="Domaines d'intérêt" data-en="Areas of interest">Domaines d'intérêt</div>
+                <p class="contact-note"
+                   data-fr="• IA générative & LLMs<br>• Data Science & Data Engineering<br>• NLP & Document AI<br>• Recherche et développement en IA"
+                   data-en="• Generative AI & LLMs<br>• Data Science & Data Engineering<br>• NLP & Document AI<br>• AI research & development">
+                  • IA générative & LLMs<br>• Data Science & Data Engineering<br>• NLP & Document AI<br>• Recherche et développement en IA
                 </p>
               </div>
             </div>
@@ -1754,24 +1790,22 @@
           <div class="reveal">
             <div class="card contact-cta">
               <div>
-                <div class="skill-group-title">Réseaux Sociaux</div>
-                <p class="contact-note">
-                  Le moyen le plus rapide de me joindre est via LinkedIn. Je suis toujours disponible pour discuter de
-                  la Data, de l'IA et des opportunités d'apprentissage.
+                <div class="skill-group-title" data-fr="Réseaux" data-en="Social links">Réseaux</div>
+                <p class="contact-note"
+                   data-fr="Retrouvez mes projets et mon parcours sur GitHub et LinkedIn."
+                   data-en="Find my projects and professional background on GitHub and LinkedIn.">
+                  Retrouvez mes projets et mon parcours sur GitHub et LinkedIn.
                 </p>
               </div>
               <div style="display:flex; flex-wrap:wrap; gap:0.7rem;">
-                <a class="btn btn-primary" target="_blank" rel="noopener noreferrer"
-                  href="https://www.linkedin.com/in/kharfasse-hiba-344250316/">
-                  LinkedIn <span class="btn-icon">💼</span>
-                </a>
-                <a class="btn btn-ghost" target="_blank" rel="noopener noreferrer" href="https://github.com/HibvKh">
-                  GitHub
-                </a>
+                <a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/kharfasse-hiba-344250316/">LinkedIn <span class="btn-icon">💼</span></a>
+                <a class="btn btn-ghost" target="_blank" rel="noopener noreferrer" href="https://github.com/HibvKh">GitHub</a>
+                <a class="btn btn-ghost" href="mailto:hibakharfasse8@gmail.com">Email</a>
               </div>
-              <p class="contact-note">
-                Je m'efforce de répondre rapidement aux messages, en particulier ceux qui proposent des objectifs ou des
-                opportunités claires.
+              <p class="contact-note"
+                 data-fr="Disponible pour échanger sur des opportunités de stage, projets IA/Data et collaborations."
+                 data-en="Open to discussing internship opportunities, AI/Data projects and collaborations.">
+                Disponible pour échanger sur des opportunités de stage, projets IA/Data et collaborations.
               </p>
             </div>
           </div>
@@ -1781,40 +1815,66 @@
   </main>
 
   <footer>
-    Conçu et codé par Hiba Kharfasse · Étudiante Ingénieure Big Data & AI.
+    <span data-fr="Conçu et codé par Hiba Kharfasse · Big Data & AI Engineer · M2 DKAI"
+          data-en="Designed and coded by Hiba Kharfasse · Big Data & AI Engineer · M2 DKAI">
+      Conçu et codé par Hiba Kharfasse · Big Data & AI Engineer · M2 DKAI
+    </span>
   </footer>
 
   <script>
+    // Language switcher: one portfolio, French + English.
+    (function () {
+      const toggle = document.getElementById("langToggle");
+      const options = document.querySelectorAll(".lang-option");
+      const translatable = document.querySelectorAll("[data-fr][data-en]");
+
+      function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        translatable.forEach((el) => {
+          const value = el.getAttribute("data-" + lang);
+          if (value !== null) el.innerHTML = value;
+        });
+        options.forEach((opt) => {
+          opt.classList.toggle("active", opt.dataset.lang === lang);
+        });
+        localStorage.setItem("portfolioLanguage", lang);
+      }
+
+      options.forEach((option) => {
+        option.addEventListener("click", () => setLanguage(option.dataset.lang));
+      });
+
+      const saved = localStorage.getItem("portfolioLanguage");
+      setLanguage(saved === "en" ? "en" : "fr");
+    })();
+  </script>
+
+  <script>
+    // Keep the original GSAP animations and navigation.
     document.addEventListener("DOMContentLoaded", function () {
-      // Check if GSAP is loaded
       if (typeof gsap === "undefined") {
-        console.warn("GSAP not loaded. Fallback to basic visibility.");
+        console.warn("GSAP not loaded.");
         return;
       }
 
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-      // --- SETUP ---
       const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
       const navList = document.querySelector(".nav-links");
       const navToggle = document.querySelector(".nav-toggle");
       const navbarWrapper = document.querySelector(".navbar-wrapper");
 
       function closeMobileNav() {
-        if (navList && navList.classList.contains("open")) {
-          navList.classList.remove("open");
-        }
+        if (navList && navList.classList.contains("open")) navList.classList.remove("open");
       }
 
-      // --- SMOOTH SCROLL ---
       navLinks.forEach((link) => {
         link.addEventListener("click", function (event) {
           event.preventDefault();
-          const targetId = this.getAttribute("href");
-          const target = document.querySelector(targetId);
+          const target = document.querySelector(this.getAttribute("href"));
           if (target) {
             gsap.to(window, {
-              duration: 1.2,
+              duration: 1.0,
               scrollTo: { y: target, offsetY: 80 },
               ease: "power4.inOut"
             });
@@ -1823,128 +1883,55 @@
         });
       });
 
-      // --- MOBILE NAV ---
       if (navToggle && navList) {
-        navToggle.addEventListener("click", function () {
-          navList.classList.toggle("open");
-        });
+        navToggle.addEventListener("click", () => navList.classList.toggle("open"));
       }
 
-      // --- HERO INTRO ---
       const heroTl = gsap.timeline();
-      heroTl.from(".navbar", { y: -100, opacity: 0, duration: 1.2, ease: "power4.out" })
-        .from(".hero-left > *", { y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" }, "-=0.6")
-        .from(".hero-right", { scale: 0.9, opacity: 0, duration: 1, ease: "back.out(1.7)" }, "-=1");
+      heroTl.from(".navbar", { y: -100, opacity: 0, duration: 1.0, ease: "power4.out" })
+        .from(".hero-left > *", { y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: "power3.out" }, "-=0.5")
+        .from(".hero-right", { scale: 0.9, opacity: 0, duration: 0.9, ease: "back.out(1.7)" }, "-=0.8");
 
-      // --- REVEAL ON SCROLL ---
       document.querySelectorAll(".reveal").forEach((item) => {
         const parent = item.parentElement;
-        if (parent && (parent.classList.contains("grid") || parent.classList.contains("services-grid") || parent.classList.contains("skills-grid"))) {
-          return;
-        }
-
+        if (parent && (parent.classList.contains("grid") || parent.classList.contains("services-grid") || parent.classList.contains("skills-grid"))) return;
         gsap.from(item, {
-          scrollTrigger: {
-            trigger: item,
-            start: "top 88%",
-            toggleActions: "play none none none"
-          },
-          y: 40,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out"
+          scrollTrigger: { trigger: item, start: "top 88%", toggleActions: "play none none none" },
+          y: 40, opacity: 0, duration: 0.9, ease: "power3.out"
         });
       });
 
-      // --- STAGGERED GRIDS ---
-      const grids = document.querySelectorAll(".grid, .services-grid, .skills-grid");
-      grids.forEach(grid => {
+      document.querySelectorAll(".grid, .services-grid, .skills-grid").forEach(grid => {
         gsap.from(grid.children, {
-          scrollTrigger: {
-            trigger: grid,
-            start: "top 85%"
-          },
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power2.out"
+          scrollTrigger: { trigger: grid, start: "top 85%" },
+          y: 40, opacity: 0, duration: 0.75, stagger: 0.12, ease: "power2.out"
         });
       });
 
-      // --- SKILL BARS ---
-      const skillBars = document.querySelectorAll(".skill-progress");
-      skillBars.forEach(bar => {
+      document.querySelectorAll(".skill-progress").forEach(bar => {
         const percent = bar.getAttribute("data-percent") || "0";
         gsap.to(bar, {
-          scrollTrigger: {
-            trigger: bar,
-            start: "top 92%"
-          },
-          width: percent + "%",
-          duration: 1.5,
-          ease: "expo.out"
+          scrollTrigger: { trigger: bar, start: "top 92%" },
+          width: percent + "%", duration: 1.4, ease: "expo.out"
         });
       });
 
-      // --- MAGNETIC BUTTONS ---
-      const btns = document.querySelectorAll(".btn");
-      btns.forEach(btn => {
+      document.querySelectorAll(".btn").forEach(btn => {
         btn.addEventListener("mousemove", (e) => {
           const rect = btn.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
           gsap.to(btn, {
-            x: x * 0.2,
-            y: y * 0.2,
-            duration: 0.3,
-            ease: "power2.out"
+            x: (e.clientX - rect.left - rect.width / 2) * 0.15,
+            y: (e.clientY - rect.top - rect.height / 2) * 0.15,
+            duration: 0.25, ease: "power2.out"
           });
         });
         btn.addEventListener("mouseleave", () => {
-          gsap.to(btn, {
-            x: 0,
-            y: 0,
-            duration: 0.5,
-            ease: "elastic.out(1, 0.4)"
-          });
+          gsap.to(btn, { x: 0, y: 0, duration: 0.45, ease: "elastic.out(1, 0.4)" });
         });
       });
 
-      // --- TYPEWRITER ---
-      const typewriterEl = document.querySelector(".hero-typewriter");
-      if (typewriterEl) {
-        const text = typewriterEl.getAttribute("data-text") || "";
-        let index = 0;
-        let deleting = false;
-
-        function type() {
-          const currentText = text.slice(0, index);
-          typewriterEl.textContent = currentText;
-
-          if (!deleting && index <= text.length) {
-            index++;
-          } else if (deleting && index >= 0) {
-            index--;
-          }
-
-          let speed = deleting ? 40 : 80;
-          if (!deleting && index === text.length + 1) {
-            speed = 2500;
-            deleting = true;
-          } else if (deleting && index === 0) {
-            speed = 1000;
-            deleting = false;
-          }
-
-          setTimeout(type, speed);
-        }
-        setTimeout(type, 2000);
-      }
-
-      // --- NAVIGATION ACTIONS ---
       function highlightNav() {
-        const sectionIds = ["#about", "#skills", "#projects", "#experience", "#services", "#certifications", "#education", "#extracurricular", "#get-in-touch"];
+        const sectionIds = ["#about", "#skills", "#experience", "#projects", "#services", "#certifications", "#education", "#extracurricular", "#get-in-touch"];
         const sectionEls = sectionIds.map(id => document.querySelector(id)).filter(Boolean);
         let currentId = null;
         const scrollPos = window.scrollY + window.innerHeight * 0.3;
@@ -1952,21 +1939,11 @@
         sectionEls.forEach(section => {
           const top = section.offsetTop;
           const bottom = top + section.offsetHeight;
-          if (scrollPos >= top && scrollPos < bottom) {
-            currentId = "#" + section.id;
-          }
+          if (scrollPos >= top && scrollPos < bottom) currentId = "#" + section.id;
         });
 
-        navLinks.forEach(link => {
-          link.classList.toggle("active", link.getAttribute("href") === currentId);
-        });
-
-        // Scrolled class toggle
-        if (window.scrollY > 50) {
-          navbarWrapper.classList.add("scrolled");
-        } else {
-          navbarWrapper.classList.remove("scrolled");
-        }
+        navLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === currentId));
+        navbarWrapper.classList.toggle("scrolled", window.scrollY > 50);
       }
 
       window.addEventListener("scroll", highlightNav);
@@ -1974,5 +1951,6 @@
     });
   </script>
 </body>
+
 
 </html>
